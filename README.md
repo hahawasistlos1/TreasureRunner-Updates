@@ -1,29 +1,37 @@
 # TreasureRunner für Android
 
-Öffentlicher Update-Kanal für die Offline-Alpha.
-
 [Neueste Version herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest)
 
-## Installation und Updates
+## Version 0.5.0 – 80 Level und Levelbaukasten
 
-Android 8 oder neuer, ARM64. Lade bei der ersten Installation `TreasureRunner.apk` aus den Release-Anhängen. Künftige Updates zeigt das Spiel im Hauptmenü und unter Optionen an: Versionsnummer, Änderungen, automatischer Download und Fortschrittsbalken. Die APK wird vor der Installation anhand von Dateigröße und SHA-256 geprüft.
+Die Kampagne umfasst 80 Level in acht bunten Comic-Welten. Zehn Leveltypen verändern den Ablauf: Entdecken, Aufstieg, Festung, Brücken, Geheimwege, Tunnel, Zerfall, Aufzüge, Belagerung und Finale. Dazu gehören längere Laufstrecken, obere Schatzwege, bewegliche Plattformen, Sprungfedern, Schatzblöcke und Schaltertore. Springer und Stürmer ergänzen die bisherigen Gegner und Schützen. Fünf weitere Shop-Upgrades verbessern Münzmagnet, Fernkampfgeschwindigkeit, Schatzbonus, Wiederbelebungen und den Schutz nach Treffern.
 
-Die Installation bestätigst du selbst in Android. Falls Android eine Freigabe für diese Installationsquelle verlangt, erteilst du sie selbst. Nach erfolgreicher Aktualisierung entfernt das Spiel seine heruntergeladene Update-APK automatisch.
+Alte Level-IDs und gekaufte Ausrüstung behalten ihre Bedeutung. Die Zusatzkapitel werden nach dem bisherigen Wächterlevel der jeweiligen Welt freigeschaltet.
 
-## Version 0.4.0 – Bunte Comic-Welten
+## Eigene Level bauen und teilen
 
-Neue Comic-Schattierung, kräftige Weltfarben und überarbeitete Landschaftsformen. Die Strecken wechseln zwischen eigenen Abschnittsfamilien wie Baumkronenpfaden, Gletscherspalten, Ruinenhöfen und Turmaufstiegen. Größere Höhenverläufe und erhöhte Schatzpfade verändern den Ablauf.
+Im Spiel: **Level-Editor** öffnen, Bauteil auswählen, tippen oder ziehen, Start und Ziel setzen, testspielen und speichern. Es gibt acht lokale Bauplätze, 14 Bauteilarten, zwölf Höhenstufen und bis zu 96 Spalten.
 
-296 Abenteuerprüfungen bestanden; 16 aktuelle Unity-Aufnahmen aus allen acht Welten. Auf Nutzerwunsch wurde diese Version ohne Smartphone-Test erstellt: Darstellung und Leistung von 0.4 auf dem A55 sind noch nicht bestätigt. Nicht alle 24 neuen Strecken sind vollständig durchgespielt.
+**Teilen** erzeugt einen Level-Code. Die andere Person wählt **Community → Level-Code importieren** und fügt ihn ein. Unter Android kann der Code über die Systemauswahl verschickt werden.
 
-## Vorherige Version 0.3.0
+**Freigeben** öffnet eine vorbereitete GitHub-Einreichung. Nach Prüfung und Aufnahme durch den Betreiber erscheint das Level in der Community-Auswahl, ohne neue APK. Für die Einreichung wird ein GitHub-Konto benötigt; direktes Teilen per Code benötigt keines. Vier Beispiellevel werden auch offline mitgeliefert. Eigene Level vergeben keine Kampagnenmünzen und schalten keine Kampagnenkapitel frei.
 
-Acht Welten mit verschiedenen Strecken und Landschaften, neue Gegner, Fernkampf mit sichtbaren Pfeilen und Elementgeschossen, Waffenwechsel im Level, vier Fallentypen und Treffer mit Rückkehr zum Start/Checkpoint.
+[Anleitung und Freigabeablauf](community/README.md) · [Community-Katalog](community/catalog.json)
 
-Damals 200 Abenteuerprüfungen und 27 Gegner-/Physikprüfungen bestanden. Auf Samsung A55 wurden Menü, Spielstandübernahme, Treffer-Rückkehr, Bogen, Runenstab und Eiswelt grundlegend geprüft. Der echte GitHub-Download, die manuelle Installation und die automatische APK-Bereinigung wurden für 0.3.0 ebenfalls auf dem A55 bestätigt.
+## Installation und Update-Meldung
 
-Die Alpha ist noch nicht abschließend ausbalanciert. Online-Freunde, Ranglisten und Koop sind noch nicht verbunden.
+Android 8 oder neuer, ARM64. Bei der ersten Installation `TreasureRunner.apk` aus den Release-Anhängen laden. Das geöffnete Spiel prüft beim Start, nach Rückkehr in die App und regelmäßig im Menü auf neue Versionen. Ein Popup zeigt Version, Änderungen und den automatischen Download mit Fortschrittsbalken. Der Menüpunkt Updates erhält eine NEU-Markierung. Eine Meldung bei vollständig geschlossener App ist nicht vorgesehen.
+
+Dateigröße und SHA-256 werden vor der Installation geprüft. Eine bereits vollständig geprüfte APK wird wiederverwendet. Die Installation muss in Android manuell bestätigt werden. Nach erfolgreichem Update wird die heruntergeladene Update-APK automatisch entfernt. Das Spiel zum Aktualisieren nicht deinstallieren, damit der lokale Spielstand erhalten bleibt.
+
+## Prüfstand und Grenzen
+
+Offline-Alpha. Der automatisierte Prüfstand und die Grenzen der jeweiligen Version stehen in ihren Release-Hinweisen. Nicht alle 80 Level sind vollständig von Hand durchgespielt oder abschließend ausbalanciert. 0.5.0 wird auf Nutzerwunsch ohne Smartphone-Test erstellt. Online-Freunde, Online-Ranglisten und Koop sind weiterhin nicht verbunden. Die Community-Auswahl verteilt Leveldaten; sie ist kein Mehrspielerserver.
 
 ## Eigener Spielcode
 
-Der Release-Anhang `TreasureRunner-Source-0.4.0.zip` enthält den freigegebenen eigenen C#-/Java-/Shader-Code, Editorwerkzeuge und Tests. Es handelt sich um einen Quellcode-Auszug, kein vollständiges startfertiges Unity-Projekt. Setup-Hinweise stehen im ZIP. Originalassets anderer Anbieter, Zugangsdaten und Signierschlüssel sind nicht enthalten. Eine zusätzliche Open-Source-Lizenz wurde nicht erteilt.
+Der Release-Anhang `TreasureRunner-Source-0.5.0.zip` enthält den freigegebenen eigenen C#-/Java-/Shader-Code, Editorwerkzeuge und Tests. Es handelt sich um einen Quellcode-Auszug, kein vollständiges startfertiges Unity-Projekt. Originalassets anderer Anbieter, Zugangsdaten, Spielstände und Signierschlüssel sind nicht enthalten. Eine zusätzliche Open-Source-Lizenz wurde nicht erteilt.
+
+## Frühere Versionen
+
+0.4.0 führte die Comic-Darstellung ein. 0.3.0 ergänzte unter anderem Fernkampf, Fallen und den GitHub-Updater. Gerätetests und der echte Installationsablauf auf dem Samsung A55 wurden für 0.3.0 bestätigt; diese historischen Tests ersetzen keinen Gerätetest der neuen Version.
