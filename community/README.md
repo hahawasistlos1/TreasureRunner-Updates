@@ -21,6 +21,8 @@ Level enthalten ausschließlich erlaubte Spielbauteile. Es werden keine Programm
 
 Die Einreichung ist noch keine Freigabe. Der Betreiber importiert und testet das Level, prüft Namen und Inhalt und nimmt es anschließend in `community/catalog.json` auf dem Zweig `TennoFarm` auf. Nach Öffnen der Community-Seite oder Katalog aktualisieren erscheint das Level im Spiel, ohne neue APK. Maximal 30 freigegebene Level und 256 KiB Kataloggröße sind für diese erste Version vorgesehen. Vier Beispiellevel werden zusätzlich mitgeliefert und funktionieren offline. Direkter Code-Austausch benötigt keine Freigabe.
 
+Ein bereits veröffentlichtes Level aktualisieren: denselben Entwurf weiterbearbeiten, mit **Version +1** die Revision erhöhen, erneut testspielen und einreichen. Der Betreiber ersetzt den Eintrag mit derselben Level-ID und höherer Revision. Beim nächsten Katalogabruf erhalten andere Spieler die aktualisierte Fassung.
+
 Im Veröffentlichungspaket liegt `community/approve_level.py` als lokales Hilfsprogramm für den Betreiber. Es validiert einen gespeicherten Code und ergänzt oder aktualisiert einen Katalogeintrag. Vor der Veröffentlichung weiter selbst testspielen; die Prüfungen sind keine automatische Qualitätsfreigabe. Das Programm wird nicht vom Spiel ausgeführt.
 
 ## Kampagne und Upgrades
