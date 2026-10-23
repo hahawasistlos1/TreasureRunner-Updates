@@ -2,36 +2,36 @@
 
 [Neueste Version herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest)
 
-## Version 0.5.0 – 80 Level und Levelbaukasten
+## Version 0.6.0 – Neues Abenteuer
 
-Die Kampagne umfasst 80 Level in acht bunten Comic-Welten. Zehn Leveltypen verändern den Ablauf: Entdecken, Aufstieg, Festung, Brücken, Geheimwege, Tunnel, Zerfall, Aufzüge, Belagerung und Finale. Dazu gehören längere Laufstrecken, obere Schatzwege, bewegliche Plattformen, Sprungfedern, Schatzblöcke und Schaltertore. Springer und Stürmer ergänzen die bisherigen Gegner und Schützen. Fünf weitere Shop-Upgrades verbessern Münzmagnet, Fernkampfgeschwindigkeit, Schatzbonus, Wiederbelebungen und den Schutz nach Treffern.
+Eigenes Schatztruhen-Icon, eine Home-Startseite und überarbeitete Menüs. Der Button **Abenteuer starten** öffnet das Spielermenü mit Welten, Shop und Inventar.
 
-Alte Level-IDs und gekaufte Ausrüstung behalten ihre Bedeutung. Die Zusatzkapitel werden nach dem bisherigen Wächterlevel der jeweiligen Welt freigeschaltet.
+Alle 80 Kampagnenlevel haben neue Hauptwege: längere Strecken, echte breite Sprunglücken, weltabhängige Höhenprofile und gezielte Herausforderungen statt gleicher Dreieck-Plattformfolgen. Es gibt eigene neue Waffenmodelle, zusätzliche Gegnerdetails und solide Kanonen-/Flammenwerfer-Gehäuse. Die Spielfigur landet auf den Gehäusen. Schwerttreffer werden im Animationsfenster entlang der sichtbaren Klinge geprüft; feste Wände blockieren sie. Der kürzere physikalische Grundsprung wurde mit etwa 0,77 Sekunden Luftzeit und 1,52 Metern Höhe gemessen.
 
-## Eigene Level bauen und teilen
+Jede der vier Waffen hat drei eigene Verbesserungsstufen. Basis-Pfeile verursachen einen, Runenkugeln zwei Lebenspunkte Schaden; gesunde Standardgegner überleben mehrere Basisschüsse. Das allgemeine Charakter-Upgrade Angriff erhöht Fernkampfschaden nicht. Jedes Kampagnenlevel besitzt eine andere mehrtaktige Original-Musikfassung.
 
-Im Spiel: **Level-Editor** öffnen, Bauteil auswählen, tippen oder ziehen, Start und Ziel setzen, testspielen und speichern. Es gibt acht lokale Bauplätze, 14 Bauteilarten, zwölf Höhenstufen und bis zu 96 Spalten.
+**Beim ersten Start von 0.6 wird der Kampagnenfortschritt für die neue Balance genau einmal zurückgesetzt.** Münzen, gekaufte Ausrüstung, Verbesserungen, Kapitel-Freischaltungen und Bestwerte starten neu. Profil, Einstellungen und selbst gebaute Level bleiben erhalten. Ein alter Kampagnenstand wird separat lokal gesichert. Das Spiel zum Aktualisieren nicht deinstallieren.
 
-**Teilen** erzeugt einen Level-Code. Die andere Person wählt **Community → Level-Code importieren** und fügt ihn ein. Unter Android kann der Code über die Systemauswahl verschickt werden.
+## Eigene Level bauen und spielen
 
-**Freigeben** öffnet eine vorbereitete GitHub-Einreichung. Nach Prüfung und Aufnahme durch den Betreiber erscheint das Level in der Community-Auswahl, ohne neue APK. Für die Einreichung wird ein GitHub-Konto benötigt; direktes Teilen per Code benötigt keines. Vier Beispiellevel werden auch offline mitgeliefert. Eigene Level vergeben keine Kampagnenmünzen und schalten keine Kampagnenkapitel frei.
+Der Editor zeigt Vorschaubilder aus denselben Bauteilen wie das Spiel. **Testspielen** sichert einen separaten Testentwurf; **Zurück zum Editor** führt aus Pause und Ergebnis zurück. Vor **Freigeben** musst du die genaue Fassung bis zum Zielportal spielen. Jede Änderung entwertet ihren bestandenen Test.
 
-[Anleitung und Freigabeablauf](community/README.md) · [Community-Katalog](community/catalog.json)
+**Freigeben** öffnet eine GitHub-Einreichung zur Prüfung. Das erzeugt noch keinen Community-Katalogeintrag. Deine Einreichung kannst du sofort öffnen: **Community → Code / GitHub-Link öffnen**, den Link zur Einreichung oder ihren vollständigen `TRL1:`-Code einfügen, importieren und **Testspielen** wählen. Für den Link wird Internet benötigt; ein kopierter Code funktioniert offline. Acht Bauplätze stehen zur Verfügung.
 
-## Installation und Update-Meldung
+Die vier Demo-Level wurden entfernt. Der Katalog startet ohne ungeprüfte Einträge. Nach Betreiberprüfung erscheinen neue Community-Level ohne zusätzliche APK. Eigene Level vergeben keine Kampagnenmünzen.
 
-Android 8 oder neuer, ARM64. Bei der ersten Installation `TreasureRunner.apk` aus den Release-Anhängen laden. Das geöffnete Spiel prüft beim Start, nach Rückkehr in die App und regelmäßig im Menü auf neue Versionen. Ein Popup zeigt Version, Änderungen und den automatischen Download mit Fortschrittsbalken. Der Menüpunkt Updates erhält eine NEU-Markierung. Eine Meldung bei vollständig geschlossener App ist nicht vorgesehen.
+[Editor-Anleitung](community/README.md) · [Community-Katalog](community/catalog.json)
 
-Dateigröße und SHA-256 werden vor der Installation geprüft. Eine bereits vollständig geprüfte APK wird wiederverwendet. Die Installation muss in Android manuell bestätigt werden. Nach erfolgreichem Update wird die heruntergeladene Update-APK automatisch entfernt. Das Spiel zum Aktualisieren nicht deinstallieren, damit der lokale Spielstand erhalten bleibt.
+## Installation und Updates
 
-## Prüfstand und Grenzen
+Android 8 oder neuer, ARM64. Aus den Release-Anhängen **TreasureRunner.apk** laden. Das geöffnete Spiel prüft beim Start, bei Rückkehr und regelmäßig im Menü auf Updates. Das Popup zeigt Version, Änderungen und Downloadfortschritt. Größe und SHA-256 werden geprüft, eine bereits vollständige geprüfte APK wird wiederverwendet. Nur die Installation benötigt die manuelle Android-Bestätigung. Nach erfolgreicher Aktualisierung wird die heruntergeladene Update-APK automatisch entfernt. Es gibt keine Update-Meldung bei vollständig geschlossener App.
 
-Offline-Alpha. Der automatisierte Prüfstand und die Grenzen der jeweiligen Version stehen in ihren Release-Hinweisen. Nicht alle 80 Level sind vollständig von Hand durchgespielt oder abschließend ausbalanciert. 0.5.0 wird auf Nutzerwunsch ohne Smartphone-Test erstellt. Online-Freunde, Online-Ranglisten und Koop sind weiterhin nicht verbunden. Die Community-Auswahl verteilt Leveldaten; sie ist kein Mehrspielerserver.
+## Prüfstand und eigener Code
 
-## Eigener Spielcode
+1.088 vollständige Unity-Prüfungen und 47 anschließende gezielte Regressionen bestanden. Alle 80 Szenen aufgebaut; gemessene Sprungphysik, sichtbare Klingen-Kollision, Waffenbalance, solide Gehäuse, Editor-Vorschauen, Testpflicht und einmaliger Reset geprüft. Acht Weltansichten und Home-/Shop-/Editor-Ansichten kontrolliert. Einzelheiten und Artefakt-Hashes stehen im Release.
 
-Der Release-Anhang `TreasureRunner-Source-0.5.0.zip` enthält den freigegebenen eigenen C#-/Java-/Shader-Code, Editorwerkzeuge und Tests. Es handelt sich um einen Quellcode-Auszug, kein vollständiges startfertiges Unity-Projekt. Originalassets anderer Anbieter, Zugangsdaten, Spielstände und Signierschlüssel sind nicht enthalten. Eine zusätzliche Open-Source-Lizenz wurde nicht erteilt.
+Offline-Alpha, auf Nutzerwunsch ohne Smartphone-Test. Kein vollständiger menschlicher Durchlauf aller 80 Level und keine abschließende Balancegarantie. Online-Freunde, Ranglisten und Koop benötigen weiterhin einen eingerichteten Serverdienst.
 
-## Frühere Versionen
+**TreasureRunner-Source-0.6.0.zip** enthält den freigegebenen eigenen C#-/Java-/Shader-Code, Editorwerkzeuge, Tests, eigene prozedurale Modelle/Musik und das eigene Spiel-Icon. Es ist ein Quellcode-Auszug, kein vollständiges startfertiges Unity-Projekt. Fremde Originalassets, Zugangsdaten, Spielstände und Signierschlüssel fehlen. Eine zusätzliche Open-Source-Lizenz wurde nicht erteilt.
 
-0.4.0 führte die Comic-Darstellung ein. 0.3.0 ergänzte unter anderem Fernkampf, Fallen und den GitHub-Updater. Gerätetests und der echte Installationsablauf auf dem Samsung A55 wurden für 0.3.0 bestätigt; diese historischen Tests ersetzen keinen Gerätetest der neuen Version.
+0.5 führte den Levelbaukasten und die 80-Kapitel-Kampagne ein, 0.4 die Comic-Darstellung, 0.3 unter anderem Fernkampf und den GitHub-Updater. Der echte A55-Installationsablauf wurde historisch für 0.3 geprüft; das ersetzt keinen Gerätetest von 0.6.
