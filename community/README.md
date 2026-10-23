@@ -1,38 +1,15 @@
-# Level bauen und teilen – Version 0.5.0
+# Level bauen, testen und spielen – 0.6.0
 
-Im Hauptmenü öffnet **Level-Editor** den Baukasten. Ein Baufeld zeigt 16 Spalten; mit den Abschnitt-Tasten erreicht man die weiteren Teile der Strecke. Anfangs sind 64, maximal 96 Spalten verfügbar, bei zwölf Höhenstufen. Tippen oder Ziehen setzt Bauteile. Der Radierer entfernt sie, Rückgängig nimmt Änderungen zurück. Über Welt wechseln wird eine der acht Comic-Landschaften gewählt.
+Auf der Home-Seite **Eigene Level bauen** wählen oder im Spielermenü **Level-Editor** öffnen. Bauteile aus der Palette auswählen, dann ins Baufeld tippen oder ziehen. Die Bilder entstehen aus denselben Modellen wie das spielbare Level. Gegner, Fallen, Checkpoint und Ziel enthalten ein Bodenfeld; Münzen schweben darüber. Jede Strecke braucht einen unterstützten Start und genau ein Zielportal. Breite und Welt können geändert werden. Speichere fertige Entwürfe in einem der acht Bauplätze.
 
-Es gibt Boden, Münzen, Nahkampfgegner, Schützen, Springer, Stürmer, Bruchboden, Aufzug, Checkpoint, Ziel, Flamme, Kanone, Fallstein und Sprungfeder. Gegner, Fallen, Checkpoint und Ziel enthalten ein Bodenfeld. Münzen können in der Luft liegen. Start setzen legt den Einstieg fest. Genau ein Zielportal ist nötig. Eine einfache Erreichbarkeitsprüfung weist getrennte Ziele zurück; sie ersetzt kein eigenes Testspielen und prüft weder alle Hindernisse noch das Timing.
+**Testspielen** sichert den aktuellen Testentwurf und startet eine Kopie. Im Pause- oder Ergebnisdialog führt **Zurück zum Editor** zum Entwurf zurück. Erst wenn du das Ziel dieser genauen Fassung erreicht hast, funktioniert **Freigeben**. Jede Änderung einschließlich Titel oder Revision verlangt einen neuen Test. Der einfache Erreichbarkeitstest erkennt grob getrennte Plattformen, garantiert aber keine Lösung zwischen beweglichen Bauteilen, Gegnern oder zu engen Hindernissen. Deshalb bleibt der erfolgreiche Durchlauf nötig.
 
-**Speichern** schreibt in einen von acht lokalen Bauplätzen. **Bauplatz** lädt einen anderen Entwurf oder beginnt dort ein neues Level. Vor einem Platzwechsel Änderungen speichern. Testspielen startet eine Kopie; der aktuelle Entwurf bleibt während derselben Spielsitzung erhalten. Nach einem App-Neustart muss der Entwurf zuvor gespeichert worden sein.
+**Freigeben** öffnet nach dem Hinweis ein vorbereitetes GitHub-Issue. Das ist eine Einreichung zur Prüfung. Nach Betreiberprüfung kann ein Level in den Community-Katalog aufgenommen werden; dieser wird unabhängig von Spiel-Updates geladen. Titel und Autorenname sind öffentlich.
 
-## Direkt teilen
+Deine eigene Einreichung sofort spielen: Auf GitHub die Einreichung öffnen und deren Link kopieren, etwa `https://github.com/hahawasistlos1/TreasureRunner-Updates/issues/1`. Im Spiel **Community → Code / GitHub-Link öffnen** wählen, Link einfügen und importieren. Das Level öffnet sich im Editor; dort **Testspielen** wählen. Alternativ den vollständigen `TRL1:`-Code aus dem Beitrag einfügen. Für einen Link wird Internet benötigt, ein kopierter Code funktioniert offline. Importierte Level in einem freien Bauplatz sichern, bevor du andere Entwürfe lädst.
 
-1. Level fertig bauen und testspielen.
-2. Teilen wählen. Der mit `TRL1:` beginnende Level-Code wird kopiert. Unter Android öffnet sich außerdem die Systemauswahl zum Teilen.
-3. Die andere Person wählt Community → Level-Code importieren, fügt den vollständigen Code ein und importiert ihn.
-4. Im Editor kann sie ihn testspielen und in einem freien Bauplatz speichern.
+Die vorhandene Einreichung **[Level] test**, Revision 3, bleibt in ihrer ursprünglichen Form erhalten. Sie enthält unter anderem eine dichte Aufzugsspalte und hohe Gegnerpositionen. Sie wird durch das Importieren nicht automatisch als erfolgreich getestet markiert. Bei Problemen im Test kannst du sie im Editor korrigieren, erneut bis zum Ziel spielen, **Version +1** wählen, die neue Fassung nochmals testen und wieder einreichen.
 
-Level enthalten ausschließlich erlaubte Spielbauteile. Es werden keine Programme, eigenen Assets oder Skripte von Spielern geladen. Größenlimits gelten vor und nach dem Entpacken. In eigenen und Community-Leveln werden Spielpunkte und Levelmünzen getrennt gezählt; Kampagnenguthaben, Erfolge und Freischaltungen werden dadurch nicht erhöht.
+**Teilen** kopiert den Level-Code und öffnet auf Android die normale Teilen-Auswahl. Die andere Person kann diesen Code direkt importieren. Der Betreiber-Katalog enthält nach der Entfernung der vier Demos zunächst keine freigegebenen Level. Lokale Bauplätze und gespeicherte Level-Codes sind davon nicht betroffen.
 
-## Für alle freigeben
-
-**Freigeben** erklärt die Veröffentlichung und öffnet danach ein vorbereitetes GitHub-Issue im Repository TreasureRunner-Updates. Titel und Autorenname werden dabei öffentlich. Ein GitHub-Konto ist für diese Einreichung notwendig. Das Spiel enthält keine Zugangsdaten und veröffentlicht nicht eigenmächtig unter dem Konto eines Spielers. Ist der Code für die URL zu lang, wird er in die Zwischenablage kopiert und muss in das Formular eingefügt werden.
-
-Die Einreichung ist noch keine Freigabe. Der Betreiber importiert und testet das Level, prüft Namen und Inhalt und nimmt es anschließend in `community/catalog.json` auf dem Zweig `TennoFarm` auf. Nach Öffnen der Community-Seite oder Katalog aktualisieren erscheint das Level im Spiel, ohne neue APK. Maximal 30 freigegebene Level und 256 KiB Kataloggröße sind für diese erste Version vorgesehen. Vier Beispiellevel werden zusätzlich mitgeliefert und funktionieren offline. Direkter Code-Austausch benötigt keine Freigabe.
-
-Ein bereits veröffentlichtes Level aktualisieren: denselben Entwurf weiterbearbeiten, mit **Version +1** die Revision erhöhen, erneut testspielen und einreichen. Der Betreiber ersetzt den Eintrag mit derselben Level-ID und höherer Revision. Beim nächsten Katalogabruf erhalten andere Spieler die aktualisierte Fassung.
-
-Im Veröffentlichungspaket liegt `community/approve_level.py` als lokales Hilfsprogramm für den Betreiber. Es validiert einen gespeicherten Code und ergänzt oder aktualisiert einen Katalogeintrag. Vor der Veröffentlichung weiter selbst testspielen; die Prüfungen sind keine automatische Qualitätsfreigabe. Das Programm wird nicht vom Spiel ausgeführt.
-
-## Kampagne und Upgrades
-
-80 Level: zehn pro Welt, darunter Lauf- und Entdeckerstrecken, Aufstiege, Festungen, Brücken, Geheimwege, Tunnel, Zerfall, Aufzüge, Belagerungen und Finalen. Die alten 24 Level-IDs behalten ihre Welt und Kapitelzuordnung, damit bestehende Bestwerte nicht in eine andere Welt verschoben werden. Zusatzkapitel werden nach dem bisherigen Wächterlevel der jeweiligen Welt und anschließend nacheinander freigeschaltet.
-
-Zusätzlich zu den bisherigen fünf Verbesserungen gibt es Münzmagnet, Schnellfeuer für Bogen/Stab, Schatzbonus, Rettungsrucksack und Schutzamulett. Alle Käufe verwenden ausschließlich erspielte Münzen.
-
-## Updates
-
-Die Update-Meldung ist eine Benachrichtigung **im geöffneten Spiel**. Beim Start, nach Rückkehr in die App und regelmäßig im Menü wird GitHub geprüft. Ein neues Release zeigt ein Popup mit Versionsnummer, Änderungen und Downloadfortschritt. Der Menüpunkt Updates erhält eine NEU-Markierung. Eine geprüfte, bereits vollständig heruntergeladene APK wird wiederverwendet. Installation bleibt eine manuelle Android-Bestätigung. Eine Benachrichtigung bei vollständig geschlossener App ist nicht implementiert.
-
-0.5.0 wird auf Nutzerwunsch ohne Handytest vorbereitet. Automatische Editor-Prüfungen und gerenderte Ansichten werden im Prüfprotokoll dokumentiert; sie ersetzen keinen vollständigen Durchlauf aller Level und keinen Gerätetest.
+Das Spiel lädt ausschließlich begrenzte Bauteildaten, keine fremden Programme, Skripte oder Spieler-Assets. Eigene Level vergeben keine Kampagnenmünzen und erhöhen keine Kampagnenfreischaltungen. Der einmalige Kampagnenreset von 0.6 löscht keine eigenen Leveldateien.

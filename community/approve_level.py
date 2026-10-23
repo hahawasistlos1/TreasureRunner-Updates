@@ -1,5 +1,5 @@
-"""Usage: python approve_level.py level-code.txt catalog.json. Local curator helper, no network."""
-import base64, collections, hashlib, json, pathlib, sys, zlib
+"""Usage: python approve_level.py level-code.txt catalog.json --tested. Local curator helper, no network."""
+import base64, collections, hashlib, json, math, pathlib, sys, zlib
 def validate(level):
     assert level.get('format')==1 and 0<=level.get('world',-1)<8,'Unsupported format/world'
     assert 16<=level.get('width',0)<=96 and 8<=level.get('height',0)<=16,'Invalid dimensions'
@@ -11,17 +11,18 @@ def validate(level):
         x,y,k=t['x'],t['y'],t['kind'];assert all(type(v) is int for v in (x,y,k))
         assert 0<=x<level['width'] and 0<=y<level['height'] and 0<=k<=13
         assert (x,y) not in cells,'Duplicate cell';cells.add((x,y))
-        if k!=1:floors.add((x,y))
+        if k not in (1,12):floors.add((x,y))
         if k==9:goals.append((x,y))
     start=(level['spawnX'],level['spawnY']);assert start in floors and len(goals)==1
     seen={start};pending=collections.deque([start])
     while pending:
         x,y=pending.popleft()
         for nx,ny in floors:
-            if (nx,ny) not in seen and abs(nx-x)<=4 and -6<=ny-y<=1:
+            if (nx,ny) not in seen and -6<=ny-y<=1.2 and max(0,abs(nx-x)-1)<=5.5*(8.4+math.sqrt(8.4**2-44*(ny-y)))/22-.65:
                 seen.add((nx,ny));pending.append((nx,ny))
     assert goals[0] in seen,'Disconnected goal'
 def main():
+    assert "--tested" in sys.argv[3:], "Test the exact revision in-game before publishing; then add --tested."
     code=pathlib.Path(sys.argv[1]).read_text(encoding='utf-8').split('TRL1:',1)[1].split()[0].strip('`')
     assert len(code)<=100000
     unpacker=zlib.decompressobj(-15);raw=unpacker.decompress(base64.b64decode(code,validate=True),65537)
