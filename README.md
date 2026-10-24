@@ -1,37 +1,33 @@
-# TreasureRunner für Android
+# TreasureRunner · Freie Bauwelten
 
-[Neueste Version herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest)
+Android-2.5D-Abenteuer im bunten Comic-Stil. Aktuelle Version: **0.7.0**.
 
-## Version 0.6.0 – Neues Abenteuer
+- [Android-APK herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest/download/TreasureRunner.apk)
+- [Windows-Levelbau und Verwaltung herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest/download/TreasureRunner-Windows-Werkzeuge.zip)
+- [Änderungen und eigener Spielcode](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest)
 
-Eigenes Schatztruhen-Icon, eine Home-Startseite und überarbeitete Menüs. Der Button **Abenteuer starten** öffnet das Spielermenü mit Welten, Shop und Inventar.
+## Frei bauen
 
-Alle 80 Kampagnenlevel haben neue Hauptwege: längere Strecken, echte breite Sprunglücken, weltabhängige Höhenprofile und gezielte Herausforderungen statt gleicher Dreieck-Plattformfolgen. Es gibt eigene neue Waffenmodelle, zusätzliche Gegnerdetails und solide Kanonen-/Flammenwerfer-Gehäuse. Die Spielfigur landet auf den Gehäusen. Schwerttreffer werden im Animationsfenster entlang der sichtbaren Klinge geprüft; feste Wände blockieren sie. Der kürzere physikalische Grundsprung wurde mit etwa 0,77 Sekunden Luftzeit und 1,52 Metern Höhe gemessen.
+Der Editor enthält **125 Bauteilvarianten in einer gemeinsamen Oberfläche**: Boden, Aufzüge, Gegner, Fallen, Beute, Natur, Dekoration und Spielziele. Alle Kategorien sind unabhängig von der gewählten Grundkulisse verfügbar. Grasblöcke, Schneeböden, Weltgegner, Skelette und Fallen lassen sich mischen. Suche und Seiten helfen bei der Auswahl; die Vorschau stammt aus dem wirklichen Spielbauteil.
 
-Jede der vier Waffen hat drei eigene Verbesserungsstufen. Basis-Pfeile verursachen einen, Runenkugeln zwei Lebenspunkte Schaden; gesunde Standardgegner überleben mehrere Basisschüsse. Das allgemeine Charakter-Upgrade Angriff erhöht Fernkampfschaden nicht. Jedes Kampagnenlevel besitzt eine andere mehrtaktige Original-Musikfassung.
+„Testspielen“ startet den eigenen Entwurf. Erst nach Erreichen des Zielportals kann genau diese Fassung eingereicht werden. Änderungen erfordern einen neuen Test. Einreichungen lassen sich sofort über ihren GitHub-Issue-Link importieren; öffentlich im Katalog erscheinen sie nach Betreiberprüfung und Freigabe.
 
-**Beim ersten Start von 0.6 wird der Kampagnenfortschritt für die neue Balance genau einmal zurückgesetzt.** Münzen, gekaufte Ausrüstung, Verbesserungen, Kapitel-Freischaltungen und Bestwerte starten neu. Profil, Einstellungen und selbst gebaute Level bleiben erhalten. Ein alter Kampagnenstand wird separat lokal gesichert. Das Spiel zum Aktualisieren nicht deinstallieren.
+## Windows-Werkzeuge
 
-## Eigene Level bauen und spielen
+ZIP vollständig entpacken und den **Runtime**-Ordner behalten. **TreasureRunner-Levelbau.exe** baut und testet Level; **TreasureRunner-Verwaltung.exe** zeigt Einreichungen, startet das echte 3D-Spiel und verwaltet Freigaben. Im Menü „Freigegebene Level“ kann eine Fassung später zurückgenommen werden. Lokal gespeicherte Spielerkopien bleiben erhalten.
 
-Der Editor zeigt Vorschaubilder aus denselben Bauteilen wie das Spiel. **Testspielen** sichert einen separaten Testentwurf; **Zurück zum Editor** führt aus Pause und Ergebnis zurück. Vor **Freigeben** musst du die genaue Fassung bis zum Zielportal spielen. Jede Änderung entwertet ihren bestandenen Test.
+Zum Ansehen und Testen ist kein Zugang nötig. Schreibaktionen benötigen ein eigenes GitHub-Token für dieses Repository mit Contents: Read and write. Es wird nur im Arbeitsspeicher der Sitzung gehalten. Die Entscheidung und Bestätigung erfolgen im Werkzeug. Anleitung und vollständige CC0-Lizenzen liegen dem Paket bei.
 
-**Freigeben** öffnet eine GitHub-Einreichung zur Prüfung. Das erzeugt noch keinen Community-Katalogeintrag. Deine Einreichung kannst du sofort öffnen: **Community → Code / GitHub-Link öffnen**, den Link zur Einreichung oder ihren vollständigen `TRL1:`-Code einfügen, importieren und **Testspielen** wählen. Für den Link wird Internet benötigt; ein kopierter Code funktioniert offline. Acht Bauplätze stehen zur Verfügung.
+Neue Asset-Level benötigen Spiel/Werkzeuge ab 0.7.0. Ein zusätzlicher Katalog hält sie von älteren APKs getrennt; neue Clients zeigen beide Quellen gemeinsam an. Die ursprüngliche Test-Einreichung #1 wird nicht automatisch freigegeben.
 
-Die vier Demo-Level wurden entfernt. Der Katalog startet ohne ungeprüfte Einträge. Nach Betreiberprüfung erscheinen neue Community-Level ohne zusätzliche APK. Eigene Level vergeben keine Kampagnenmünzen.
+## Spiel und Aktualisierung
 
-[Editor-Anleitung](community/README.md) · [Community-Katalog](community/catalog.json)
+Virtueller Joystick, kompakte Aktionsknöpfe, drei Herzen mit halbem Herz je Treffer und separaten Leben. Waffen-Upgrades, Schatzräume, Weltwächter, 80 Kampagnenlevel und Credits für die Asset-Künstler sind enthalten.
 
-## Installation und Updates
+**Android 8+, ARM64.** Bestehende Installation behalten und die APK darüber installieren. Im Spiel erscheint bei einem Update ein Popup mit Änderungen und Downloadfortschritt. Der Download wird geprüft; die Installation muss in Android selbst bestätigt werden. Nach erfolgreicher Installation wird die heruntergeladene Update-APK automatisch gelöscht. Bei vollständig geschlossener App erscheint keine Update-Meldung. Beim Update von 0.6 auf 0.7 gibt es keinen erneuten Kampagnen-Reset; eigene Level bleiben erhalten.
 
-Android 8 oder neuer, ARM64. Aus den Release-Anhängen **TreasureRunner.apk** laden. Das geöffnete Spiel prüft beim Start, bei Rückkehr und regelmäßig im Menü auf Updates. Das Popup zeigt Version, Änderungen und Downloadfortschritt. Größe und SHA-256 werden geprüft, eine bereits vollständige geprüfte APK wird wiederverwendet. Nur die Installation benötigt die manuelle Android-Bestätigung. Nach erfolgreicher Aktualisierung wird die heruntergeladene Update-APK automatisch entfernt. Es gibt keine Update-Meldung bei vollständig geschlossener App.
+**Offline-Alpha.** 535 Spiel-/Katalogprüfungen, 33 Herzenprüfungen sowie 15 Windows-Editor- und 9 Verwaltungsprüfungen bestanden. Weiterhin ohne Handytest und ohne vollständige menschliche Durchläufe aller 80 Level. Online-Freunde, Online-Ranglisten und Koop benötigen weiterhin einen Serverdienst.
 
-## Prüfstand und eigener Code
+## Credits und Quellcode
 
-1.088 vollständige Unity-Prüfungen und 47 anschließende gezielte Regressionen bestanden. Alle 80 Szenen aufgebaut; gemessene Sprungphysik, sichtbare Klingen-Kollision, Waffenbalance, solide Gehäuse, Editor-Vorschauen, Testpflicht und einmaliger Reset geprüft. Acht Weltansichten und Home-/Shop-/Editor-Ansichten kontrolliert. Einzelheiten und Artefakt-Hashes stehen im Release.
-
-Offline-Alpha, auf Nutzerwunsch ohne Smartphone-Test. Kein vollständiger menschlicher Durchlauf aller 80 Level und keine abschließende Balancegarantie. Online-Freunde, Ranglisten und Koop benötigen weiterhin einen eingerichteten Serverdienst.
-
-**TreasureRunner-Source-0.6.0.zip** enthält den freigegebenen eigenen C#-/Java-/Shader-Code, Editorwerkzeuge, Tests, eigene prozedurale Modelle/Musik und das eigene Spiel-Icon. Es ist ein Quellcode-Auszug, kein vollständiges startfertiges Unity-Projekt. Fremde Originalassets, Zugangsdaten, Spielstände und Signierschlüssel fehlen. Eine zusätzliche Open-Source-Lizenz wurde nicht erteilt.
-
-0.5 führte den Levelbaukasten und die 80-Kapitel-Kampagne ein, 0.4 die Comic-Darstellung, 0.3 unter anderem Fernkampf und den GitHub-Updater. Der echte A55-Installationsablauf wurde historisch für 0.3 geprüft; das ersetzt keinen Gerätetest von 0.6.
+Neue CC0-Bauteile: [Kenney](https://kenney.nl/assets) und [Kay Lousberg / KayKit](https://kaylousberg.com). Weitere vorhandene Anbieter werden im Spiel und in den Paket-Credits genannt. Eigener Code wird als ZIP-Auszug bereitgestellt; Originalassets anderer Anbieter und Signierschlüssel sind nicht enthalten. Für eigenen Code wurde keine zusätzliche Open-Source-Lizenz vergeben.
