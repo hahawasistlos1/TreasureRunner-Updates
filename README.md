@@ -1,33 +1,32 @@
-# TreasureRunner · Freie Bauwelten
+# TreasureRunner
 
-Android-2.5D-Abenteuer im bunten Comic-Stil. Aktuelle Version: **0.7.0**.
+Ein buntes Android-Jump-and-Run mit acht Welten, 80 Kampagnenleveln, Waffen, Upgrades und eigenem Levelbaukasten.
 
-- [Android-APK herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest/download/TreasureRunner.apk)
-- [Windows-Levelbau und Verwaltung herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest/download/TreasureRunner-Windows-Werkzeuge.zip)
-- [Änderungen und eigener Spielcode](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/latest)
+## Aktuell: 0.8.0
 
-## Frei bauen
+- [Android-APK herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.8.0/TreasureRunner.apk)
+- [Windows-Levelbau und Verwaltung herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.8.0/TreasureRunner-Windows-Werkzeuge.zip)
+- [Eigene Quellen 0.8.0](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.8.0/TreasureRunner-Source-0.8.0.zip)
+- [Alle Änderungen und Downloads](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/tag/v0.8.0)
 
-Der Editor enthält **125 Bauteilvarianten in einer gemeinsamen Oberfläche**: Boden, Aufzüge, Gegner, Fallen, Beute, Natur, Dekoration und Spielziele. Alle Kategorien sind unabhängig von der gewählten Grundkulisse verfügbar. Grasblöcke, Schneeböden, Weltgegner, Skelette und Fallen lassen sich mischen. Suche und Seiten helfen bei der Auswahl; die Vorschau stammt aus dem wirklichen Spielbauteil.
+Neues Fantasy-Menü nach der eigenen Bildvorlage, entsprechend gestaltete Windows-Werkzeuge, auswählbare Bewegungspfeile oder Joystick, vier Figuren, bessere Rasterblöcke und Undo/Redo, weitere Gegnerbegegnungen, Heilherzen/Schutzschilde, lokale Freundeseinladungen per Link und vorbereitete kleine Datenpatches. Bestehende Spielstände und eigene Level bleiben erhalten; kein neuer Kampagnen-Reset.
 
-„Testspielen“ startet den eigenen Entwurf. Erst nach Erreichen des Zielportals kann genau diese Fassung eingereicht werden. Änderungen erfordern einen neuen Test. Einreichungen lassen sich sofort über ihren GitHub-Issue-Link importieren; öffentlich im Katalog erscheinen sie nach Betreiberprüfung und Freigabe.
+Android ARM64, mindestens Android 8. Die vorhandene App zum Aktualisieren behalten und die APK darüber installieren. Das Spiel prüft GitHub-Updates, zeigt Änderungen und Downloadfortschritt; die Installation wird selbst in Android bestätigt. Die APK-Signatur bleibt unverändert. Windows-Paket vollständig einschließlich Runtime entpacken, dann Levelbau oder Verwaltung starten; keine Unity-Installation nötig.
 
-## Windows-Werkzeuge
+1.347 Prüfungen für Spiel, Editor und die fertigen Windows-Werkzeuge bestanden. Weiterhin ohne Handytest. Die Quellen sind ein Auszug mit eigenen Menügrafiken und lizenzierten Schriften, kein vollständiges Unity-Projekt; fremde Originalmodelle und Signierschlüssel sind nicht enthalten. Credits und Lizenzen liegen im Spiel und Windows-Paket.
 
-ZIP vollständig entpacken und den **Runtime**-Ordner behalten. **TreasureRunner-Levelbau.exe** baut und testet Level; **TreasureRunner-Verwaltung.exe** zeigt Einreichungen, startet das echte 3D-Spiel und verwaltet Freigaben. Im Menü „Freigegebene Level“ kann eine Fassung später zurückgenommen werden. Lokal gespeicherte Spielerkopien bleiben erhalten.
+## Eigene und Community-Level
 
-Zum Ansehen und Testen ist kein Zugang nötig. Schreibaktionen benötigen ein eigenes GitHub-Token für dieses Repository mit Contents: Read and write. Es wird nur im Arbeitsspeicher der Sitzung gehalten. Die Entscheidung und Bestätigung erfolgen im Werkzeug. Anleitung und vollständige CC0-Lizenzen liegen dem Paket bei.
+Im Editor bauen und speichern, dann genau diese Fassung bis zum Ziel testen. „Freigeben“ öffnet ein GitHub-Einreichungsformular. Einreichen bedeutet noch keine öffentliche Freigabe. Level-Codes und Issue-Links können bereits direkt importiert und gespielt werden.
 
-Neue Asset-Level benötigen Spiel/Werkzeuge ab 0.7.0. Ein zusätzlicher Katalog hält sie von älteren APKs getrennt; neue Clients zeigen beide Quellen gemeinsam an. Die ursprüngliche Test-Einreichung #1 wird nicht automatisch freigegeben.
+Das Windows-Verwaltungsprogramm lädt Einreichungen und freigegebene Level, bietet einen 3D-Prüflauf und kann nach bewusster Bestätigung veröffentlichen oder eine Freigabe später zurücknehmen. Schreibzugang benötigt ein eigenes auf dieses Repository begrenztes GitHub-Token; es bleibt nur während der Sitzung im Arbeitsspeicher. Kein Token gehört in ein Level oder eine Einreichung.
 
-## Spiel und Aktualisierung
+Klassische Level nutzen `community/catalog.json`, Asset-Level `community/catalog-v2.json` und zusätzliche 0.8-Mechaniken `community/catalog-v3.json`. Ein noch nicht vorhandener zusätzlicher Katalog gilt als leer. Die neue Spielversion führt alle Quellen zusammen; ältere APKs laden keine unbekannten Bauteile. Keine automatische APK-Erstellung beim Freigeben von Leveln.
 
-Virtueller Joystick, kompakte Aktionsknöpfe, drei Herzen mit halbem Herz je Treffer und separaten Leben. Waffen-Upgrades, Schatzräume, Weltwächter, 80 Kampagnenlevel und Credits für die Asset-Künstler sind enthalten.
+## Freunde und Einladungen
 
-**Android 8+, ARM64.** Bestehende Installation behalten und die APK darüber installieren. Im Spiel erscheint bei einem Update ein Popup mit Änderungen und Downloadfortschritt. Der Download wird geprüft; die Installation muss in Android selbst bestätigt werden. Nach erfolgreicher Installation wird die heruntergeladene Update-APK automatisch gelöscht. Bei vollständig geschlossener App erscheint keine Update-Meldung. Beim Update von 0.6 auf 0.7 gibt es keinen erneuten Kampagnen-Reset; eigene Level bleiben erhalten.
+Ab 0.8.0 gibt es im Freunde-Menü einen teilbaren Einladungslink. Die [Einladungsseite](https://hahawasistlos1.github.io/treasurerunner/invite/) öffnet eine unterstützte installierte App oder führt zum offiziellen Download. Der Empfänger bestätigt das Hinzufügen. Kontakte bleiben zunächst lokal; Online-Status, gegenseitige Server-Freundschaften und Koop benötigen weiterhin einen Onlinedienst.
 
-**Offline-Alpha.** 535 Spiel-/Katalogprüfungen, 33 Herzenprüfungen sowie 15 Windows-Editor- und 9 Verwaltungsprüfungen bestanden. Weiterhin ohne Handytest und ohne vollständige menschliche Durchläufe aller 80 Level. Online-Freunde, Online-Ranglisten und Koop benötigen weiterhin einen Serverdienst.
+## Kleine Spielpatches
 
-## Credits und Quellcode
-
-Neue CC0-Bauteile: [Kenney](https://kenney.nl/assets) und [Kay Lousberg / KayKit](https://kaylousberg.com). Weitere vorhandene Anbieter werden im Spiel und in den Paket-Credits genannt. Eigener Code wird als ZIP-Auszug bereitgestellt; Originalassets anderer Anbieter und Signierschlüssel sind nicht enthalten. Für eigenen Code wurde keine zusätzliche Open-Source-Lizenz vergeben.
+Die 0.8.0 enthält einen geprüften Datenpatch-Lader mit Änderungsanzeige, Offline-Cache und Rücknahme. Unterstützte Werte und Levelabschnitte können später als kleine versionierte Datenpakete korrigiert werden. Neuer Programmcode oder neue Assets benötigen weiterhin eine APK. Derzeit ist kein zusätzlicher Datenpatch veröffentlicht.
