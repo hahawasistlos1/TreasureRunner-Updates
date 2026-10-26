@@ -1,0 +1,1 @@
+-keep class com.treasurerunner.identity.IdentityBridge { public static *; }

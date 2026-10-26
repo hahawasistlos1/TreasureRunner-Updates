@@ -1,0 +1,13 @@
+# TreasureRunner 0.9.0
+
+- Windows-Download ausschließlich Welteneditor: bauen, speichern, freiwillig testspielen, importieren, teilen und zur Freigabe einreichen. Verwaltung ist nicht im öffentlichen Windows-Programm enthalten und lässt sich dort auch nicht per Startparameter aktivieren.
+- Die neue Verwaltung bleibt lokal beim Spielbetreiber. Nur dessen GitHub-Konto darf über das Programm freigeben oder Freigaben entfernen. Ein Durchspielen ist weder zum Einreichen noch für die Betreiberfreigabe Pflicht; die Prüfung gültiger Leveldaten bleibt erhalten.
+- APK und Verwaltung 0.9.0 verwenden ausschließlich `community/0.9.0/catalog.json` mit passendem Versionsvertrag. Alte Verwaltungsprogramme schreiben andere Kataloge und verändern damit nicht die Auswahl der neuen APK. Bestehende eigene Level-Codes und Bauplätze bleiben importierbar. Die bisherige Test-Einreichung wird nicht automatisch freigegeben.
+- Acht Waffen mit Figuren-Spezialwaffen und kaufbaren Fähigkeiten. Weitere Waffen werden im Kampagnenverlauf verfügbar, die letzten Ausbaustufen kurz vor Abschluss. Größere Touch-Tasten und unabhängige Größenregler in Einstellungen/Pause.
+- Bewegliche Plattformen blockieren seitlich und von unten und nehmen die Figur beim Fahren mit. Gelber beweglicher Asset-Block mit korrigiert.
+- Automatische Datenpatches im gemeinsamen Update-Popup mit Änderungsnotizen und Fortschritt, ohne Rücknahme-Button. Normale APK-Updates werden als normale Updates angezeigt. Android-Installation weiterhin manuell.
+- Updatebenachrichtigungen auch bei geschlossenem Spiel, mit Android-Berechtigung und systemgesteuerten Prüfintervallen. Die native Komponente ist in der installierten APK geprüft. Eine Benachrichtigung zu einer erst künftig höheren Version bleibt gesondert zu prüfen; Android kann Prüfungen verzögern.
+- Google-Anmeldung eingerichtet, anschließend eigener Nickname. Auf dem A55 mit echtem angemeldetem Profil und nach vollständigem App-Neustart geprüft. Im Spielprofil erscheinen keine Google-E-Mail, kein Google-Profilname und kein Profilbild. Spielstände und Freundeslisten bleiben lokal; keine Cloud-Spielstandssynchronisierung.
+- Quellen als direkt sichtbare Dateien im Git-Repository statt eines neuen Source-ZIP-Anhangs. Fremde Originalmodelle und private Schlüssel sind nicht Bestandteil der öffentlichen Quellen. Credits bleiben enthalten.
+
+Android ARM64 ab Android 8, Version 0.9.0 / Android-Code 10. Vorhandene App zum Aktualisieren behalten. Kein neuer Spielstandsreset. Öffentliche Downloads dieser Version: `TreasureRunner.apk` und `TreasureRunner-Windows-Editor.zip`. Alte Veröffentlichungsdateien bleiben unverändert.

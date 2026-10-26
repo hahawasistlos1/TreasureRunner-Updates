@@ -1,0 +1,509 @@
+{
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Mage.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Characters/fbx/Skeleton_Mage.fbx",
+      "sha256": "a5b6a9e9c690b2c23f52aa7a18aef411b56e9c660229c7e2d0f217f78752573c",
+      "bytes": 22295116
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Minion.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Characters/fbx/Skeleton_Minion.fbx",
+      "sha256": "440381230027cb691d8a57c923b41d90ed66236f7a867fff86f5fb51a5315723",
+      "bytes": 21911932
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Rogue.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Characters/fbx/Skeleton_Rogue.fbx",
+      "sha256": "2961f9cb6640f4627db4b9213b7b349270dc737a4c9b5f7aa5f078203887f78d",
+      "bytes": 22790796
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Warrior.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Characters/fbx/Skeleton_Warrior.fbx",
+      "sha256": "783d88baface5b5aec4be3a1bdfe360e12e091dae753b3968161e7a69bd0c279",
+      "bytes": 22402076
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/skeleton_texture.png",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Textures/skeleton_texture.png",
+      "sha256": "15741a25c53e04fa9bf3beac3bc0de442359404b1ff9be863b892cb551ad3657",
+      "bytes": 17037
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Crossbow.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Assets/fbx/Skeleton_Crossbow.fbx",
+      "sha256": "51f4262edab36a36a854f63d96ed7085de818cc606e91e5b48c4a5028eae0491",
+      "bytes": 39548
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Staff.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Assets/fbx/Skeleton_Staff.fbx",
+      "sha256": "7b9fa1ec537d6c5d609e83c2e3d13e247ca252716cab36a6fa83a63100145457",
+      "bytes": 77836
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/Skeleton_Blade.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/addons/kaykit_character_pack_skeletons/Assets/fbx/Skeleton_Blade.fbx",
+      "sha256": "16c3d747dcbb0fc12902f4d99a31edee06c02348815308dc19a02ac1955ee515",
+      "bytes": 34508
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Skeletons/LICENSE.txt",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/15b62b9bad122f72926c10fb14d622c73819fa54/LICENSE.txt",
+      "sha256": "5d822abca4e08c5a91d329e5372b3dc605cba8d994f752cb0f7dfdb7a0a79954",
+      "bytes": 914
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/chest_gold.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/chest_gold.fbx",
+      "sha256": "672f98242543b2ba3a51ba33109d82101d961de127690f3846270e2430fe8d01",
+      "bytes": 67148
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/key.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/key.fbx",
+      "sha256": "7c9784b9a9c55bcb5b2c77140e7470fa83b3183546470ad915c1cbe2d9e4e8c5",
+      "bytes": 23820
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/pillar_decorated.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/pillar_decorated.fbx",
+      "sha256": "1f2af46f6954630664637a5074dda2535a75e284d25c9b95be313bba978aeaa7",
+      "bytes": 44652
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/barrel_large.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/barrel_large.fbx",
+      "sha256": "da828b2bcbfb12148b49e40d4937c0c58b135eba7c15b823caee49fb54ef2fa9",
+      "bytes": 36012
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/crates_stacked.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/crates_stacked.fbx",
+      "sha256": "73e5c7443b1ce29c63d1b77cfc911fe0fc7835afe1f9417f0ff7ae3a0678e933",
+      "bytes": 62076
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/banner_red.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/banner_red.fbx",
+      "sha256": "73052ab54aa9c2a9b2fe4ab1d682cf3a947eaa2d201d6f9b4088000e9188be04",
+      "bytes": 22140
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/banner_blue.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/banner_blue.fbx",
+      "sha256": "99d2bc3c921468ce033a9be599f50593f4e20106353f2334d68c70a7ba7eb543",
+      "bytes": 22124
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/torch_mounted.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/torch_mounted.fbx",
+      "sha256": "edd053866ec82f441d0ee3239075f9c6a1fa9e0d4da8d881caa112ba0180560b",
+      "bytes": 28460
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/rubble_large.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/rubble_large.fbx",
+      "sha256": "95e9539420308fa1fd4a4336a81ce994cd329e7b8fc048afab93a2a1027badb6",
+      "bytes": 54220
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/dungeon_texture.png",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/texture/dungeon_texture.png",
+      "sha256": "f9ae182518f908bd09461a56a430b9ca7369812ac10890224cc6f32e7da3e1ee",
+      "bytes": 15794
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/LICENSE.txt",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/LICENSE.txt",
+      "sha256": "c5f17abf619731f57f6bbff450f6484214605c13aa96bb75bbcfc70930941ff7",
+      "bytes": 829
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/campfire_stones.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "e4af071d4e837a344b982d4aabdba651a36ca78354c8f4c1c04dee83a4c0ac18",
+      "bytes": 54276
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/canoe.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "57a970147054b4aa5d19e98ddb8cab337b716b81f16228ad6ea0c90ec4010739",
+      "bytes": 41811
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/log_stack.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "686cc3d50cc7070fc251962f478231375d300e64c5d79bd0b466edff6b5cec5b",
+      "bytes": 33923
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/mushroom_red.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "240bedc466c6238232553314c2b55ffbcde58d1ae8073a82d001d8ec3cf6cf82",
+      "bytes": 20798
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/plant_bush.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "ddedd161e7d9475efddee7fa511b283b6f36f4624b388194d45fbc2bdcba7a0a",
+      "bytes": 16968
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/plant_bushLarge.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "51860c0a7e4f438c83edc17845ed06ee4e5bde498a952f09db8c4dde889c51e5",
+      "bytes": 23496
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/rock_largeA.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "92d499e82fcb27146ece915cea0ba09427553221124b63bf6193c5ece7dad3e5",
+      "bytes": 25590
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/rock_largeB.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "02e34faf37469e9742060cdd720c6fd703d6f4a4f8631216975c0eaffe197784",
+      "bytes": 26602
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/rock_tallA.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "7b9a9aab017af1f2cfa8acff5c891e621821ae61ff17b85c90558fd7b9119048",
+      "bytes": 35573
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/statue_obelisk.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "86b25fabd164cfb6f2e95870b83b7fdff5319f3923963994c68bccc233d5b0da",
+      "bytes": 17177
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/tent_smallOpen.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "7a4052d64fcf892924c6c776f703b3ea68145884684369eebd0e5d7440aef1e0",
+      "bytes": 40585
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/tree_oak.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "efa277f3467e6102cce7d35381a4e8256e2346f86c6ce83a0fd02f5586b7c9fe",
+      "bytes": 45836
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/tree_palm.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "431dde96a0d9e3fb32a8cbe8111f0f8c5e005250a33f436b084672473c98a09c",
+      "bytes": 40845
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/tree_palmTall.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "b3418bfc933d245ee0bf68733c99c852b0fdde3f186393a9401a553236cf0442",
+      "bytes": 42577
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/tree_pineTallA.fbx",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "46ba9b870e1845890d0c4d24422f0df12a25f5be6eae464b34a2c52993c17084",
+      "bytes": 22995
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Nature/License.txt",
+      "source": "https://kenney.nl/assets/nature-kit",
+      "sha256": "cb96b75e3560ac78d7a53ce6f083f4cdb5c53faea6141b62d63458dcfe1e4b9d",
+      "bytes": 611
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Particles/circle_05.png",
+      "source": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "sha256": "925b8ac284436f74f9cadf0ecd058da1c08fba65c098e4e34fd220603022f02e",
+      "bytes": 65336
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Particles/fire_01.png",
+      "source": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "sha256": "9727a9743ac6ab8dd4dd79f5fc5b0266290efae45f4d4452279eb5e4bcf3a978",
+      "bytes": 99891
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Particles/smoke_04.png",
+      "source": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "sha256": "2db2f69874cdb1e5203f2f86803d5debde30402590cf50a810afaba882184616",
+      "bytes": 97568
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Particles/spark_05.png",
+      "source": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "sha256": "9624ea2017b8b2767a9d3b82e978b7fdf5154d83e6756cd919da51447bb97138",
+      "bytes": 64808
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Particles/star_04.png",
+      "source": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "sha256": "6485ac16c773663bd39346f3bedae04465ac14c661eb47cc5cfa935cdbf6c2ec",
+      "bytes": 30613
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Particles/License.txt",
+      "source": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "sha256": "f9e70b81d8cc07c4e07c9f2eff1d94fd371a06070b18cb67c651c41158ec2975",
+      "bytes": 651
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/coin.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/coin.fbx",
+      "sha256": "5d70db217a869f253a322274f42bf78ffa3859e0d1de4ed331ba4f143d817f12",
+      "bytes": 21740
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/coin_stack_small.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/coin_stack_small.fbx",
+      "sha256": "a3a7b0cee44a60a5a2225bde5c47baeb499ba06a2d0853b9bd27ff5bd4550ade",
+      "bytes": 31436
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/coin_stack_medium.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/coin_stack_medium.fbx",
+      "sha256": "de9d0ce519e0f44b4027ed318199e4adac2b5889cb67a881c68a281c89dd1c54",
+      "bytes": 47020
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/coin_stack_large.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/coin_stack_large.fbx",
+      "sha256": "ba688a8a460b943b7bb49c9efc407ca5727e678de1eacf9fe8f6cf1599a8ec96",
+      "bytes": 67596
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_dirt_small_A.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_dirt_small_A.fbx",
+      "sha256": "c99e5568602f20b8388b19fedb7673b0504e3298e9c51dfff1406fa3ea2474c4",
+      "bytes": 20972
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_tile_small.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_tile_small.fbx",
+      "sha256": "07bdab0b6d90f856b4535b555355d226969d892573b8dd09b9692fe30b587c67",
+      "bytes": 20524
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_tile_small_broken_A.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_tile_small_broken_A.fbx",
+      "sha256": "01116dc5dd8150d64efba0d399aaa0c2505065c30b729bde0286cf94743c1294",
+      "bytes": 21916
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_tile_small_decorated.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_tile_small_decorated.fbx",
+      "sha256": "1b52793c28ccebca91b5ed09d132c97da7a3792dcab8302cc29a9d51ccc4868b",
+      "bytes": 32364
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_wood_small.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_wood_small.fbx",
+      "sha256": "eeb9572b96b0692331ae25ad5466ee6864dd64e1385cfdb4e276460ec98b7f0c",
+      "bytes": 20636
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_wood_small_dark.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_wood_small_dark.fbx",
+      "sha256": "4aff72b15013a88351cf05e3a318f2c923c7dbe0612b04aa2c7163a443ffb5c5",
+      "bytes": 20636
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_foundation_allsides.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_foundation_allsides.fbx",
+      "sha256": "0c26f5822e020b9feec92249741fb795f412f5415195ab7e7513adfa95c1bdc2",
+      "bytes": 29180
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_tile_big_spikes.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_tile_big_spikes.fbx",
+      "sha256": "019edcbae7f9514704ba207c94bc74bc19ca2894ef36d6938aac433d281154c1",
+      "bytes": 36332
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/floor_tile_grate.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/floor_tile_grate.fbx",
+      "sha256": "fc0c0bb91d991a28e50dff9c388f82b61b7ee3949298b84f9b0d844961d6ac09",
+      "bytes": 22716
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/wall.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/wall.fbx",
+      "sha256": "93bb647a900a2f9d9485f44e4f0675d4239aa5360dcc30db2748a289d6442a25",
+      "bytes": 33180
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/wall_cracked.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/wall_cracked.fbx",
+      "sha256": "7942aa32d7f719cf1ddb38eb0975590e9e89093a9de31e57878819e0b97476d6",
+      "bytes": 86204
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/wall_arched.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/wall_arched.fbx",
+      "sha256": "8a7b1f5fa74e563a9f94f4c58c5be95cd06653c0a160a9905a9a8e8abed8ad4c",
+      "bytes": 42156
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/stairs.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/stairs.fbx",
+      "sha256": "1d835a1526d494481c69b78c8d311d828cb4b3c5583d5c753d2a75263826b001",
+      "bytes": 29548
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/barrier.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/barrier.fbx",
+      "sha256": "87fd18f28f202a494dd884ae0c5b9cc845cb7e74c5ce0554f84c3f3fa0b2e55e",
+      "bytes": 20716
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Dungeon/sword_shield.fbx",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0/b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07/addons/kaykit_dungeon_remastered/Assets/fbx/sword_shield.fbx",
+      "sha256": "4047949c75ec81be4597f03f0dacb32df556b7f939aedca80729c8a23946aacb",
+      "bytes": 38236
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/block-grass.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "5c3a76ab53a26df8aacc49c857d21ef7160a6d8475f551eeb1cbed4aabb02263",
+      "bytes": 27264
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/block-snow.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "7b1c66d9c3a97e7967c4890d128a463707215e39c0196d08d8e27954e9a89a57",
+      "bytes": 27264
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/block-moving.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "bc15add45e216feac8c42fd14ff607ebe2c807cf07bb859384d57b7e4521de2e",
+      "bytes": 26976
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/brick.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "3ae034cb0f8831fb14ac84ca26ab941616aa5155ea36cf55786c014068fe35ed",
+      "bytes": 33072
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/platform.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "794038fe2a77b22c306f9507dba8f6ca4fd0df484099def47d2a8d03bc91b92d",
+      "bytes": 26592
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/platform-fortified.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "8b99139442dc4cfc945151c55b86b8c977a1d64310e58f31ab8c715d2790322a",
+      "bytes": 25920
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/coin-gold.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "172f87fead58600b8b059583c8c366ba56fa224fde672aacdc1d82a21d4af045",
+      "bytes": 26784
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/coin-silver.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "0fc961c0a199ddd56137859673f0f904357804b6f06d2994ed90366020584f2a",
+      "bytes": 27440
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/coin-bronze.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "d6e5242a39e76e93798a078880e9a53a13af0da2f4e11a1bd9625b97abb2d63e",
+      "bytes": 27440
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/saw.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "ea8f8eda09a5d2db2228726650c1b1e45df2b04a9c7dc0483de4ce299fea8491",
+      "bytes": 29504
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/trap-spikes.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "b487891f1ce62c1e44039caf30de61273e5de03d0fc50b0119c9964472e16dca",
+      "bytes": 64000
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/spike-block.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "5f85c825a53c8f158945d8254529a89353ed0ac7c79efadbba5068f4c3dcac69",
+      "bytes": 28736
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/pipe.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "d54f44a23ee2df027d489b5181f226c701353f4179d02865bdd4e530b27e02a7",
+      "bytes": 31232
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/spring.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "516d4f12597f22b957f7945adb4cb6a4ae692bc132f5167a74c4956e7294f24f",
+      "bytes": 60912
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/bomb.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "a1eab3b1bd0d005810984b664f53d9e4ea71ed7f4df2397660a07774d221e9b2",
+      "bytes": 31136
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/crate.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "968e5c4750fea8e38659a90f079f7c07c6b6a4fd126bd3a22715842b876e0c51",
+      "bytes": 27264
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/crate-item.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "4f2062da6ddc91f14d4d0b8a56b975991fbee59fe9107d7cd316b7d9f3df5d29",
+      "bytes": 29472
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/barrel.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "08beebe877eb43cb912098db82fcff3b9bd51066c138a7d1a6ae6f7af680cff4",
+      "bytes": 28336
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/lever.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "cf594643fa7b7f5dd52392143a2cbab73b2d701ebb34e885733a4320d99bc76a",
+      "bytes": 63296
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/heart.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "36d756babcb36bc2cc7f42174d5f7825cbd050f353da1469feb79a6f33bf6d76",
+      "bytes": 27344
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/chest.fbx",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "97bdc6c2b0eb1eb201b0b8f00222fb618113b250ce45b0543fd52fd3b79e9e8c",
+      "bytes": 61056
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/colormap.png",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "439dfcac935cfd75dc16f28333a4c8284fffcc4b24f857c61cfb4c8a964a15bd",
+      "bytes": 11140
+    },
+    {
+      "file": "Assets/Resources/OpenArt/Platformer/License.txt",
+      "source": "https://kenney.nl/assets/platformer-kit",
+      "sha256": "e1185354d8f0f055c325c7204602326c8cf0c47ee5ae1db7ed16f0465b91bb9a",
+      "bytes": 703
+    }
+  ]
+}

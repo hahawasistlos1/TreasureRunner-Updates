@@ -1,32 +1,27 @@
 # TreasureRunner
 
-Ein buntes Android-Jump-and-Run mit acht Welten, 80 Kampagnenleveln, Waffen, Upgrades und eigenem Levelbaukasten.
+Android-Jump-and-Run mit acht Welten, 80 Kampagnenleveln, acht Waffen, Figurenfähigkeiten und einem gemeinsamen Welteneditor.
 
-## Aktuell: 0.8.0
+## Version 0.9.0
 
-- [Android-APK herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.8.0/TreasureRunner.apk)
-- [Windows-Levelbau und Verwaltung herunterladen](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.8.0/TreasureRunner-Windows-Werkzeuge.zip)
-- [Eigene Quellen 0.8.0](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.8.0/TreasureRunner-Source-0.8.0.zip)
-- [Alle Änderungen und Downloads](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/tag/v0.8.0)
+- [Android-APK](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.9.0/TreasureRunner.apk)
+- [Windows-Welteneditor](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.9.0/TreasureRunner-Windows-Editor.zip)
+- [Änderungen und Release](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/tag/v0.9.0)
+- [Eigener Spielcode direkt im Git-Repository](Assets/Scripts)
+- [Anleitung zum Windows-Editor](Documentation/Windows-Welteneditor-0.9.md)
 
-Neues Fantasy-Menü nach der eigenen Bildvorlage, entsprechend gestaltete Windows-Werkzeuge, auswählbare Bewegungspfeile oder Joystick, vier Figuren, bessere Rasterblöcke und Undo/Redo, weitere Gegnerbegegnungen, Heilherzen/Schutzschilde, lokale Freundeseinladungen per Link und vorbereitete kleine Datenpatches. Bestehende Spielstände und eigene Level bleiben erhalten; kein neuer Kampagnen-Reset.
+Das öffentliche Windows-Programm enthält ausschließlich den Welteneditor. Testspielen ist freiwillig; **Einreichen** schickt ein Level zur Entscheidung an den Betreiber. Nur hahawasistlos1 gibt Level öffentlich frei. Die separate Verwaltung wird nicht als Download verteilt. Android und die aktuelle Verwaltung nutzen ausschließlich `community/0.9.0/catalog.json` mit Protokoll 4 und passender Spielversion. Alte Verwaltungsprogramme können die neue Community-Auswahl über ihre alten Kataloge nicht ändern. Vorhandene eigene Codes/Bauplätze bleiben importierbar.
 
-Android ARM64, mindestens Android 8. Die vorhandene App zum Aktualisieren behalten und die APK darüber installieren. Das Spiel prüft GitHub-Updates, zeigt Änderungen und Downloadfortschritt; die Installation wird selbst in Android bestätigt. Die APK-Signatur bleibt unverändert. Windows-Paket vollständig einschließlich Runtime entpacken, dann Levelbau oder Verwaltung starten; keine Unity-Installation nötig.
+Größere und selbst skalierbare Touch-Tasten, zusätzliche Waffen und Fähigkeiten, korrigierte bewegliche Plattformen, automatische Datenpatches ohne Rücknahme und Hintergrund-Updatebenachrichtigungen sind enthalten. APK-Installation bleibt manuell; Android steuert die Zeitpunkte der Hintergrundprüfungen. Kein neuer Spielstandsreset. Die APK wurde auf einem A55 aktualisiert; Google-Profil und Wiederherstellung nach App-Neustart sind geprüft. Eigene Leveldateien blieben unverändert. Kein vollständiger Durchspieltest aller 80 Level.
 
-1.347 Prüfungen für Spiel, Editor und die fertigen Windows-Werkzeuge bestanden. Weiterhin ohne Handytest. Die Quellen sind ein Auszug mit eigenen Menügrafiken und lizenzierten Schriften, kein vollständiges Unity-Projekt; fremde Originalmodelle und Signierschlüssel sind nicht enthalten. Credits und Lizenzen liegen im Spiel und Windows-Paket.
+Google-Anmeldung mit selbst gewähltem Nickname ist für Android eingerichtet und auf dem A55 geprüft. Das Spielprofil zeigt keine Google-E-Mail, keinen Google-Profilnamen und kein Profilbild. Firebase läuft im kostenlosen Spark-Tarif, die Nickname-Datenbank liegt in Europa (eur3). Freunde/Spielstände werden nicht automatisch online synchronisiert. [Einrichtung und Datenfluss](Documentation/Google-Anmeldung-Nickname.md).
 
-## Eigene und Community-Level
+## Quellen als Git-Dateien
 
-Im Editor bauen und speichern, dann genau diese Fassung bis zum Ziel testen. „Freigeben“ öffnet ein GitHub-Einreichungsformular. Einreichen bedeutet noch keine öffentliche Freigabe. Level-Codes und Issue-Links können bereits direkt importiert und gespielt werden.
+Eigener C#-/Java-/Shader-Code, Editoren, Build-/Prüfwerkzeuge, eigene Menügrafiken und Schriften mit Lizenzen stehen direkt in der Git-Historie. Kein zusätzlicher Source-ZIP-Anhang. Dies ist ein Quellcode-Auszug, **kein vollständig startfertiges Unity-Projekt**: fremde Originalmodelle, ursprüngliche Szenengrundlage und Unity-Pakete müssen rechtmäßig ergänzt werden. Originalmodelle aus dem Asset Store, private Signierschlüssel, Tokens, Spielstände und Build-Caches werden nicht veröffentlicht. Für den eigenen Code wird keine zusätzliche Open-Source-Lizenz eingeräumt. [Credits und Asset-Quellen](Documentation/Credits.md).
 
-Das Windows-Verwaltungsprogramm lädt Einreichungen und freigegebene Level, bietet einen 3D-Prüflauf und kann nach bewusster Bestätigung veröffentlichen oder eine Freigabe später zurücknehmen. Schreibzugang benötigt ein eigenes auf dieses Repository begrenztes GitHub-Token; es bleibt nur während der Sitzung im Arbeitsspeicher. Kein Token gehört in ein Level oder eine Einreichung.
+Entwicklungsumgebung: Unity 6000.3.17f1 / URP, Android ARM64 ab API 26 und Windows x64. Aktuelle Build-Einstiege: `TreasureRunnerRelease09.Android`, `.WindowsEditor`, `.WindowsAdmin`. `.WindowsAdmin` ist eine eigene lokale Ausgabe und kein Teil des öffentlichen Windows-Pakets. Die Repository-Schreibrechte schützen die Freigaben auch dann, wenn jemand den öffentlich einsehbaren Verwaltungscode selbst kompiliert. Builds/Versionserhöhungen/Veröffentlichungen nur auf ausdrücklichen Besitzerauftrag.
 
-Klassische Level nutzen `community/catalog.json`, Asset-Level `community/catalog-v2.json` und zusätzliche 0.8-Mechaniken `community/catalog-v3.json`. Ein noch nicht vorhandener zusätzlicher Katalog gilt als leer. Die neue Spielversion führt alle Quellen zusammen; ältere APKs laden keine unbekannten Bauteile. Keine automatische APK-Erstellung beim Freigeben von Leveln.
+## Einladungen und Updates
 
-## Freunde und Einladungen
-
-Ab 0.8.0 gibt es im Freunde-Menü einen teilbaren Einladungslink. Die [Einladungsseite](https://hahawasistlos1.github.io/treasurerunner/invite/) öffnet eine unterstützte installierte App oder führt zum offiziellen Download. Der Empfänger bestätigt das Hinzufügen. Kontakte bleiben zunächst lokal; Online-Status, gegenseitige Server-Freundschaften und Koop benötigen weiterhin einen Onlinedienst.
-
-## Kleine Spielpatches
-
-Die 0.8.0 enthält einen geprüften Datenpatch-Lader mit Änderungsanzeige, Offline-Cache und Rücknahme. Unterstützte Werte und Levelabschnitte können später als kleine versionierte Datenpakete korrigiert werden. Neuer Programmcode oder neue Assets benötigen weiterhin eine APK. Derzeit ist kein zusätzlicher Datenpatch veröffentlicht.
+Die [Einladungsseite](https://hahawasistlos1.github.io/treasurerunner/invite/) öffnet unterstützte Apps oder bietet den offiziellen APK-Download. Nach Installation dieselbe Einladung erneut öffnen. Kleine Datenpatches verändern nur unterstützte Daten; neuer Code und neue Assets benötigen eine APK. Derzeit wird mit 0.9.0 kein zusätzlicher Datenpatch veröffentlicht.

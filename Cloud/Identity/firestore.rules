@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function nicknameValid(n) {
+      return n is string && n.size() >= 3 && n.size() <= 20
+        && n.matches('^[A-Za-z0-9ÄÖÜäöüß_. -]+$')
+        && n.matches('.*[A-Za-z0-9ÄÖÜäöüß].*')
+        && !n.matches('^ .*') && !n.matches('.* $');
+    }
+    match /players/{uid} {
+      allow get: if request.auth != null;
+      allow list: if false;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasAll(['nickname','schema'])
+        && request.resource.data.keys().hasOnly(['nickname','schema'])
+        && request.resource.data.schema == 1 && nicknameValid(request.resource.data.nickname);
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
