@@ -45,7 +45,10 @@ namespace TreasureRunner
             if(!materials.TryGetValue(texture,out var material))
             {
                 var template=Resources.Load<Material>("OpenArt/Materials/Particle");if(template==null){pool.Enqueue(particles);return;}
-                material=new Material(template);material.SetTexture("_BaseMap",Resources.Load<Texture2D>("OpenArt/Particles/"+texture));materials[texture]=material;
+                var imported=System.Array.Find(AssetLibrary.Data.images,i=>i.pack=="kenney-particles" && i.title.Replace(' ','_')==texture);
+                if(texture.StartsWith("smoke"))imported=System.Array.Find(AssetLibrary.Data.images,i=>i.pack=="kenney-smoke");
+                var image=imported!=null ? Resources.Load<Texture2D>(imported.resource) : Resources.Load<Texture2D>("OpenArt/Particles/"+texture);
+                material=new Material(template);material.SetTexture("_BaseMap",image);materials[texture]=material;
             }
             particles.GetComponent<ParticleSystemRenderer>().sharedMaterial=material;var settings=particles.main;settings.startColor=color;
             particles.transform.position = position; particles.gameObject.SetActive(true);

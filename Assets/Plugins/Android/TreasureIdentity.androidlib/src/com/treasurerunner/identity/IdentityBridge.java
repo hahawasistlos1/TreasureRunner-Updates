@@ -33,6 +33,8 @@ import org.json.JSONObject;
 
 /** Only uid and an explicitly chosen nickname cross into Unity. No provider profile or raw errors. */
 public final class IdentityBridge {
+    static FirebaseFirestore reviewDatabase(){return profiles;}
+    static FirebaseAuth reviewAuth(){return auth;}
     private static FirebaseAuth auth;
     private static FirebaseFirestore profiles;
     private static CredentialManager manager;

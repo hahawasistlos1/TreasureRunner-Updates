@@ -11,8 +11,9 @@ namespace TreasureRunner
         private Vector3 velocity;
         private int damage;
         private float life;
+        Transform arrow;public bool IsArrow {get;private set;}
         private readonly RaycastHit[] hits=new RaycastHit[24];
-        public static void Fire(Vector3 position,Vector3 direction,int power)
+        public static void Fire(Vector3 position,Vector3 direction,int power,bool arrow=false)
         {
             if(root==null)
             {
@@ -28,7 +29,12 @@ namespace TreasureRunner
                 go.transform.localScale=Vector3.one*.22f;go.GetComponent<Collider>().enabled=false;Destroy(go.GetComponent<Collider>());
                 go.GetComponent<Renderer>().sharedMaterial=shared;shot=go.AddComponent<EnemyBolt>();
             }
-            shot.transform.position=position;shot.velocity=direction.normalized*5;shot.damage=power;shot.life=3;shot.gameObject.SetActive(true);
+            shot.transform.position=position;shot.transform.rotation=Quaternion.identity;shot.transform.localScale=Vector3.one;
+            if(arrow && shot.arrow==null)shot.arrow=EnemyArrowArt.Build(shot.transform);
+            shot.IsArrow=arrow && shot.arrow!=null;shot.GetComponent<Renderer>().enabled=!shot.IsArrow;
+            if(shot.arrow!=null)shot.arrow.gameObject.SetActive(shot.IsArrow);
+            shot.transform.localScale=Vector3.one*(shot.IsArrow ? 1 : .22f);if(shot.IsArrow)shot.transform.rotation=Quaternion.FromToRotation(Vector3.up,direction);
+            shot.velocity=direction.normalized*5;shot.damage=power;shot.life=3;shot.gameObject.SetActive(true);
         }
         private void FixedUpdate()
         {

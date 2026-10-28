@@ -16,14 +16,15 @@ namespace TreasureRunner
             {
                 if(PatchClient.Instance==null)new GameObject("Small Data Patches").AddComponent<PatchClient>();
                 var camera = new GameObject("Menu Camera",typeof(Camera),typeof(AudioListener)).GetComponent<Camera>();
+                camera.tag="MainCamera";
                 camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = GameUI.Ink;
                 camera.cullingMask &= ~(1 << 30);
                 GameAudio.Instance.PlayTheme(-1);
-                if(DesktopTools.Active){HomeScreen.ReturnToPlayerMenu=false;EditorTestSession.ReturnToEditor=false;DesktopTools.Build(transform);}
+                if(DesktopTools.Active){HomeScreen.ReturnToPlayerMenu=false;bool returning=EditorTestSession.ReturnToEditor;EditorTestSession.ReturnToEditor=false;if(returning && !DesktopTools.Moderator)LevelEditorScreen.OpenDocument(LevelEditorScreen.Working);else DesktopTools.Build(transform);}
                 else if(HomeScreen.ReturnToPlayerMenu || EditorTestSession.ReturnToEditor)
                 {
                     HomeScreen.ReturnToPlayerMenu=false;gameObject.AddComponent<MainMenuController>().Build();
-                    if(EditorTestSession.ReturnToEditor){EditorTestSession.ReturnToEditor=false;LevelEditorScreen.Open();}
+                    if(EditorTestSession.ReturnToEditor){EditorTestSession.ReturnToEditor=false;LevelEditorScreen.OpenDocument(LevelEditorScreen.Working);}
                 }
                 else gameObject.AddComponent<HomeScreen>().Build();
             }

@@ -75,6 +75,7 @@ namespace TreasureRunner
             var button = rect.gameObject.AddComponent<Button>();
             button.interactable = enabled;
             button.onClick.AddListener(action);
+            button.onClick.AddListener(()=>{GameAudio.Ensure();GameAudio.Instance?.Play("click");});
             rect.gameObject.AddComponent<MenuButtonMotion>();
             FantasyMenu.Frame(button.image,accent);
             var colors = button.colors;
@@ -85,6 +86,7 @@ namespace TreasureRunner
             var text = Text(label, rect, 22, Color.white);
             Stretch(text.rectTransform, 12,5,12,5);
             text.alignment = TextAnchor.MiddleCenter;
+            LibraryTheme.Button(button);
             return button;
         }
         public static RectTransform Column(Transform parent, float spacing = 14, int padding = 0)

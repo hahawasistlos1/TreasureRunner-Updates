@@ -38,8 +38,8 @@ namespace TreasureRunner
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");yield return null;yield return null;yield return null;
             var menu=FindFirstObjectByType<MainMenuController>();menu.Show("Levelauswahl");yield return null;yield return UIShot("Levelauswahl");
             menu.Show("Shop");yield return null;yield return UIShot("Shop");
-            LevelEditorScreen.Working=LevelCodec.Starter();LevelEditorScreen.Open();yield return null;
-            var paint=FindFirstObjectByType<EditorPaintSurface>();paint.paint(9,1);paint.paint(10,2);paint.paint(11,3);yield return null;yield return UIShot("Level-Editor");
+            LevelEditorScreen.OpenDocument(LevelCodec.Starter());yield return null;
+            var paint=FindFirstObjectByType<EditorLevelScene>();paint.paint(9,1);paint.paint(10,2);paint.paint(11,3);yield return null;yield return UIShot("Level-Editor");
             var editor=FindFirstObjectByType<LevelEditorScreen>();editor.SendMessage("Close");yield return null;
             menu.Show("Community");yield return new WaitForSecondsRealtime(2);yield return UIShot("Community");
             var updates=GameUpdateClient.Instance;

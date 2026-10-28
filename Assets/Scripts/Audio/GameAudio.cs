@@ -9,6 +9,7 @@ namespace TreasureRunner
         private AudioSource music;
         private AudioSource effects;
         private readonly Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
+        private readonly HashSet<AudioClip> owned=new HashSet<AudioClip>();
         public static void Ensure()
         {
             if (Instance == null) new GameObject("GameAudio").AddComponent<GameAudio>();
@@ -26,7 +27,9 @@ namespace TreasureRunner
             clips["kill"] = Tone(260, .18f);
             clips["win"] = Tone(660, .5f);
             clips["buy"] = Tone(1046, .2f);
-            music.clip = AdventureMusic.Compose(-1);
+            foreach(string key in new[]{"coin","jump","hit","kill","win","buy","click","step"})
+            {var imported=LibraryAudioBank.Effect(key);if(imported!=null)clips[key]=imported;}
+            music.clip = ThemeClip(-1);
             ApplyVolumes();
             music.Play();
         }
@@ -34,8 +37,9 @@ namespace TreasureRunner
         public void PlayTheme(int id)
         {
             if(theme==id)return;theme=id;music.Stop();var old=music.clip;
-            music.clip=AdventureMusic.Compose(id);music.Play();if(old!=null)Destroy(old);
+            music.clip=ThemeClip(id);music.Play();if(old!=null && owned.Remove(old))Destroy(old);
         }
+        AudioClip ThemeClip(int id){var clip=LibraryAudioBank.Theme(id);if(clip!=null)return clip;clip=AdventureMusic.Compose(id);owned.Add(clip);return clip;}
         private AudioClip Tone(float frequency, float seconds)
         {
             float[] samples = new float[Mathf.CeilToInt(22050 * seconds)];
@@ -46,6 +50,7 @@ namespace TreasureRunner
             }
             AudioClip clip = AudioClip.Create("Tone",samples.Length,1,22050,false);
             clip.SetData(samples,0);
+            owned.Add(clip);
             return clip;
         }
         public void Play(string id)
@@ -61,8 +66,7 @@ namespace TreasureRunner
         {
             if (Instance != this) return;
             Instance = null;
-            foreach (var clip in clips.Values) Destroy(clip);
-            if (music != null && music.clip != null) Destroy(music.clip);
+            foreach (var clip in owned)if(clip!=null)Destroy(clip);
         }
     }
 }

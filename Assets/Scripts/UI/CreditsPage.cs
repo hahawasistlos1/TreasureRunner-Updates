@@ -16,6 +16,8 @@ namespace TreasureRunner
         public static void Build(Transform parent)
         {
             GameUI.Text("DANKE AN DIE ASSET-KÜNSTLER",parent,30,GameUI.Gold);
+            foreach(var pack in AssetLibrary.Data.packs)
+                Entry(parent,pack.author+" · "+pack.title,"Verwendete kostenlose Ausgabe · "+pack.license,pack.url,pack.licenseResource);
             Entry(parent,"Kay Lousberg · KayKit","Skeletons Character Pack und Dungeon Remastered: spielbare Skelettfiguren, Gegner, Ausrüstung und Requisiten. CC0 1.0.","https://kaylousberg.com","OpenArt/Skeletons/LICENSE");
             Entry(parent,"Kenney","Nature Kit: Bäume, Felsen, Pflanzen und Kulissen. Particle Pack: Treffer-, Rauch-, Feuer- und Magietexturen. CC0 1.0.","https://kenney.nl/assets","OpenArt/Nature/License");
             Entry(parent,"Kenney · Platformer Kit","Baublöcke, bewegliche Plattform, Münzen, Säge, Stacheln, Sprungfeder und weitere Bau-Requisiten. CC0 1.0.","https://kenney.nl/assets/platformer-kit","OpenArt/Platformer/License");

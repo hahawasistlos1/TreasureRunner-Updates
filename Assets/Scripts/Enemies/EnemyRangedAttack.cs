@@ -4,6 +4,7 @@ namespace TreasureRunner
     [RequireComponent(typeof(Enemy))]
     public class EnemyRangedAttack : MonoBehaviour
     {
+        public bool EditorPreview;
         [Min(1)] public float range=8;
         [Min(.25f)] public float windup=.9f;
         [Min(1)] public float cooldown=2.8f;
@@ -24,17 +25,17 @@ namespace TreasureRunner
             material=new Material(Shader.Find("Universal Render Pipeline/Simple Lit"));material.color=new Color(1,.28f,.04f);
             orb.GetComponent<Renderer>().sharedMaterial=material;marker=orb.transform;orb.SetActive(false);
             var bowRoot=new GameObject("Archer bow");bowRoot.transform.SetParent(transform,false);bowRoot.transform.localPosition=new Vector3(0,.15f,-.2f);
-            if(GetComponent<SkeletonMotion>()==null)LevelFactory.AddVisual(GameConfig.Current.bowVisual,bowRoot.transform,.6f,-.2f);
+            if(GetComponent<SkeletonMotion>()==null && GetComponent<LibraryEnemyEquipment>()==null)LevelFactory.AddVisual(GameConfig.Current.bowVisual,bowRoot.transform,.6f,-.2f);
             nextAttack=Time.time+1;
         }
         private void Update()
         {
             var run=LevelRun.Instance;
-            if(enemy.IsDefeated || run==null || !run.IsPlaying) { if(enemy.IsDefeated) Cancel();return; }
-            var player=run.Player;
-            if(player==null || player.health<=0) { Cancel();return; }
-            Vector3 muzzle=transform.position+Vector3.up*.2f;
-            Vector3 point=player.transform.position-Vector3.up*.35f;
+            if(enemy.IsDefeated || (!EditorPreview && (run==null || !run.IsPlaying))) { if(enemy.IsDefeated) Cancel();return; }
+            var player=run?.Player;
+            if(!EditorPreview && (player==null || player.health<=0)) { Cancel();return; }
+            var equipment=GetComponent<LibraryEnemyEquipment>();Vector3 muzzle=equipment!=null ? equipment.ShotOrigin : transform.position+Vector3.up*.2f;
+            Vector3 point=EditorPreview ? transform.position+Vector3.left*5 : player.transform.position-Vector3.up*.35f;
             float distance=Vector3.Distance(muzzle,point);
             if(distance>range || Mathf.Abs(point.z-muzzle.z)>1) { Cancel();return; }
             if(IsPreparing)
@@ -42,9 +43,11 @@ namespace TreasureRunner
                 marker.localScale=Vector3.one*Mathf.Lerp(.12f,.4f,1-(fireAt-Time.time)/windup);
                 if(Time.time>=fireAt)
                 {
-                    EnemyBolt.Fire(muzzle,aim,damage);ShotsFired++;
+                    bool arrow=equipment!=null && (equipment.weaponId=="bow" || equipment.weaponId=="crossbow");
+                    if(EditorPreview)EditorPreviewProjectile.Fire(transform.parent,muzzle,aim,arrow);else EnemyBolt.Fire(muzzle,aim,damage,arrow);ShotsFired++;
                     GetComponent<CharacterPresentation>()?.AttackPose();
                     GetComponent<SkeletonMotion>()?.Attack();
+                    GetComponent<LibraryMotion>()?.Attack();
                     Cancel();nextAttack=Time.time+cooldown;
                 }
                 return;

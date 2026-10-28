@@ -18,6 +18,7 @@ namespace TreasureRunner
         [Serializable] class GitHubAccount {public string login;}
         public void Build()
         {
+            if(string.IsNullOrEmpty(sessionToken))sessionToken=ModeratorCredential.Load();
             root=GameUI.Canvas("TreasureRunner Levelverwaltung");
             root=ToolWindowTheme.Workspace(root,"Community-Verwaltung","Einreichungen prüfen · Freigaben verwalten","community");
             var bg=GameUI.Panel("Hintergrund",root,GameUI.Ink);GameUI.Stretch(bg);
@@ -76,11 +77,12 @@ namespace TreasureRunner
         void Credentials()
         {
             var c=Dialog("GitHub-Zugang für Freigaben");
-            GameUI.Text("Öffentliche Einreichungen kannst du ohne Anmeldung ansehen und testen. Zum Freigeben: persönliches Fine-grained-Token, nur TreasureRunner-Updates, Contents: Read and write. Der Zugang bleibt ausschließlich bis zum Beenden im Arbeitsspeicher.",c,24).GetComponent<LayoutElement>().preferredHeight=145;
+            GameUI.Text("Öffentliche Einreichungen kannst du ohne Anmeldung ansehen und testen. Zum Freigeben: persönliches Fine-grained-Token, nur TreasureRunner-Updates, Contents: Read and write. Windows kann den Zugang geschützt in seiner Anmeldeinformationsverwaltung behalten.",c,24).GetComponent<LayoutElement>().preferredHeight=145;
             var input=LevelEditorScreen.Input(c,"",300);input.contentType=InputField.ContentType.Password;
             GameUI.Button("Token-Verwaltung öffnen",c,()=>Application.OpenURL("https://github.com/settings/personal-access-tokens/new"));
             GameUI.Button("Für diese Sitzung verwenden",c,()=>{sessionToken=input.text.Trim();input.text="";Destroy(c.parent.gameObject);Say(string.IsNullOrEmpty(sessionToken) ? "Zugang entfernt." : "Zugang für diese Sitzung übernommen.");});
-            GameUI.Button("Zugang entfernen",c,()=>{sessionToken="";input.text="";Destroy(c.parent.gameObject);Say("Zugang entfernt.");});
+            GameUI.Button("Geschützt speichern und verbunden bleiben",c,()=>{var token=input.text.Trim();if(string.IsNullOrEmpty(token)){Say("Gib zuerst dein GitHub-Token ein.");return;}if(!ModeratorCredential.Store(token)){Say("Windows konnte den Zugang nicht speichern. Du kannst ihn für diese Sitzung verwenden.");return;}sessionToken=token;input.text="";Destroy(c.parent.gameObject);Say("GitHub-Zugang geschützt gespeichert. Beim nächsten Start wieder verfügbar.");});
+            GameUI.Button("Zugang entfernen",c,()=>{if(!ModeratorCredential.Store("")){Say("Gespeicherter Zugang konnte nicht entfernt werden. Bitte in Windows → Anmeldeinformationsverwaltung prüfen.");return;}sessionToken="";input.text="";Destroy(c.parent.gameObject);Say("Zugang entfernt.");});
             GameUI.Button("Zurück",c,()=>Destroy(c.parent.gameObject));
         }
         void Confirm()

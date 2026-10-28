@@ -94,7 +94,7 @@ namespace TreasureRunner
             LevelRun.CustomLevel=null;EditorTestSession.Clear();HomeScreen.ReturnToPlayerMenu=false;SceneManager.LoadScene("MainMenu");yield return null;yield return null;
             var home=FindFirstObjectByType<HomeScreen>();Check(home!=null && FindFirstObjectByType<MainMenuController>()==null,"Home opens first and player menu waits for a button");UIShot("Home");home.OpenPlayerMenu();yield return null;
             var menu=FindFirstObjectByType<MainMenuController>();Check(menu!=null,"Start button opens player menu");menu.Show("Shop");yield return null;UIShot("Shop");
-            LevelEditorScreen.Working=LevelCodec.Starter();LevelEditorScreen.Open();yield return null;
+            LevelEditorScreen.OpenDocument(LevelCodec.Starter());yield return null;
             for(int i=0;i<14;i++){var icon=EditorTilePreview.Get((LevelTile)i,0);Check(icon!=null && icon.GetPixels().Any(c=>c.a>.5f),"Actual game-built tile preview renders: "+(LevelTile)i);}
             UIShot("Editor");var draft=LevelEditorScreen.Working;Check(!EditorTestSession.Passed(draft),"New draft has no optional completion proof");
             var editor=FindFirstObjectByType<LevelEditorScreen>();editor.SendMessage("Submit");Check(GameObject.Find("Dialog")!=null,"Untested valid draft opens submission dialog");

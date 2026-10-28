@@ -12,6 +12,7 @@ namespace TreasureRunner
             var root=new GameObject("Equipped "+id).transform;root.SetParent(hand,false);
             root.localScale=new Vector3(1/hand.lossyScale.x,1/hand.lossyScale.y,1/hand.lossyScale.z);
             var model=root.gameObject.AddComponent<WeaponModel>();
+            if(LibraryWeaponFit.Build(model,id))return model;
             Color wood=new Color(.42f,.20f,.09f),steel=new Color(.72f,.93f,1),gold=new Color(1,.68f,.15f);
             Part(root,PrimitiveType.Cube,new Vector3(0,.06f,0),new Vector3(.10f,.26f,.10f),wood);
             if(id=="spear")

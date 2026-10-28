@@ -13,6 +13,7 @@ public class EnemyPatrol : MonoBehaviour
     public float visualYawOffset;
     public bool Suspended { get; set; }
     public bool IsMoving { get; private set; }
+    public bool EditorPreview {get;set;}
     private Rigidbody body;
     private BoxCollider hitbox;
     private Enemy enemy;
@@ -43,7 +44,7 @@ public class EnemyPatrol : MonoBehaviour
         direction=wanted;
         float step = enemy.speed * (awareness!=null ? awareness.SpeedMultiplier : 1) * Time.fixedDeltaTime;
         Vector3 next = body.position + Vector3.right * (direction * step);
-        Bounds bounds = hitbox.bounds;
+        Bounds bounds = EditorPreview ? new Bounds(body.position+transform.TransformVector(hitbox.center),Vector3.Scale(hitbox.size,transform.lossyScale)) : hitbox.bounds;
         float front = bounds.center.x + direction * (bounds.extents.x + step + 0.03f);
         bool blocked = HasEnvironment(bounds.center, Vector3.right * direction,
             bounds.extents.x + step + 0.03f);

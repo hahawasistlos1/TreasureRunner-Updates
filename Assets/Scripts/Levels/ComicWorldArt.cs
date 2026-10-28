@@ -36,11 +36,10 @@ namespace TreasureRunner
             switch(world)
             {
                 case 0:
-                    Tree(new Vector3(x-w*.25f,y,4.6f),4.7f+index%3*.9f,false);
-                    if(index%2==0)Tree(new Vector3(x+w*.35f,y,7.5f),6,false);
+                    if(!LibraryWorldArt.HasScenery(world)){Tree(new Vector3(x-w*.25f,y,4.6f),4.7f+index%3*.9f,false);if(index%2==0)Tree(new Vector3(x+w*.35f,y,7.5f),6,false);}
                     if(s.feature==RouteFeature.Canopy){Tree(new Vector3(x,y-5,1.3f),5.8f,false);Shape("Canopy branch",cube,new Vector3(x,y-.35f,0),new Vector3(w,.5f,1.4f),wood);}
                     if(s.feature==RouteFeature.RootBridge)Boardwalk(s);
-                    if(s.feature==RouteFeature.Clearing && index%2==0){Shape("Fallen tree trunk",cube,new Vector3(x+w*.22f,y+.5f,4.3f),new Vector3(4,.9f,1.2f),wood,Quaternion.Euler(0,0,-8));Shape("Flowering shrub",rock,new Vector3(x+w*.22f,y+.9f,4.3f),new Vector3(1.5f,.7f,1),pink);}
+                    if(!LibraryWorldArt.HasScenery(world) && s.feature==RouteFeature.Clearing && index%2==0){Shape("Fallen tree trunk",cube,new Vector3(x+w*.22f,y+.5f,4.3f),new Vector3(4,.9f,1.2f),wood,Quaternion.Euler(0,0,-8));Shape("Flowering shrub",rock,new Vector3(x+w*.22f,y+.9f,4.3f),new Vector3(1.5f,.7f,1),pink);}
                     break;
                 case 1:
                     Crystal(new Vector3(x-w*.25f,y,4.8f),2.8f,stone);
@@ -68,13 +67,12 @@ namespace TreasureRunner
                     if(s.feature==RouteFeature.Tunnel)Arch(new Vector3(x,y,4),3.2f,stone);
                     break;
                 case 5:
-                    Tree(new Vector3(x-2,y,5),7.5f,true);
-                    Mushroom(new Vector3(x+2,y,4),s.feature==RouteFeature.MushroomGrove ? 3.8f : 1.8f);
+                    if(!LibraryWorldArt.HasScenery(world)){Tree(new Vector3(x-2,y,5),7.5f,true);Mushroom(new Vector3(x+2,y,4),s.feature==RouteFeature.MushroomGrove ? 3.8f : 1.8f);}
                     if(s.feature==RouteFeature.HollowTree)Arch(new Vector3(x,y,5),3.4f,wood);
                     if(s.feature==RouteFeature.ThornPass)Boardwalk(s);
                     break;
                 case 6:
-                    Castle(s,index);
+                    if(!LibraryWorldArt.HasScenery(world))Castle(s,index);
                     break;
                 case 7:
                     Shape("Floating island",rock,new Vector3(x,y-1.6f,.1f),new Vector3(w*.45f,2,1.6f),stone,Quaternion.Euler(0,0,180));

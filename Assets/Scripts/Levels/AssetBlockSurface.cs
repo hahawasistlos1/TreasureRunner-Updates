@@ -4,9 +4,10 @@ namespace TreasureRunner
 {
     public class OwnedBlockMesh:MonoBehaviour
     {
-        public Mesh mesh;
+        public Mesh mesh,collision;
         public void Replace(Mesh value){if(mesh!=null)Destroy(mesh);mesh=value;}
-        void OnDestroy(){if(mesh!=null)Destroy(mesh);}
+        public void ReplaceCollision(Mesh value){if(collision!=null)Destroy(collision);collision=value;}
+        void OnDestroy(){if(mesh!=null)Destroy(mesh);if(collision!=null)Destroy(collision);}
     }
     public static class AssetBlockSurface
     {
@@ -16,13 +17,25 @@ namespace TreasureRunner
         public static Bounds GeometryBounds(Renderer renderer)
         {
             var filter=renderer.GetComponent<MeshFilter>();var skin=renderer as SkinnedMeshRenderer;
-            if(skin!=null)return renderer.bounds;
-            Bounds local=filter!=null && filter.sharedMesh!=null ? filter.sharedMesh.bounds : skin!=null ? skin.localBounds : new Bounds(Vector3.zero,Vector3.one);
+            Bounds local;
+            if(skin!=null){var baked=new Mesh();skin.BakeMesh(baked,true);local=baked.bounds;if(Application.isPlaying)Object.Destroy(baked);else Object.DestroyImmediate(baked);}
+            else if(filter!=null && filter.sharedMesh!=null)
+            {
+                var mesh=filter.sharedMesh;local=mesh.bounds;
+                // Some imported static meshes (notably the Adventurers bow) have a
+                // zero-sized cached bound despite containing visible vertices.
+                // Repair it before fitting; dividing by the empty bound makes a giant weapon.
+                if(mesh.isReadable && mesh.vertexCount>0 && (local.size.sqrMagnitude<.00000001f || !Finite(local)))
+                {mesh.RecalculateBounds();local=mesh.bounds;}
+            }
+            else local=new Bounds(Vector3.zero,Vector3.one);
             var bounds=new Bounds(renderer.transform.TransformPoint(local.center),Vector3.zero);
             for(int n=0;n<8;n++)bounds.Encapsulate(renderer.transform.TransformPoint(local.center+Vector3.Scale(local.extents,new Vector3((n&1)==0 ? -1 : 1,(n&2)==0 ? -1 : 1,(n&4)==0 ? -1 : 1))));
             return bounds;
         }
-        public static GameObject Default(int world)=>OpenWorldArt.Asset(defaults[world]);
+        static bool Finite(Bounds b)=>Finite(b.center.x) && Finite(b.center.y) && Finite(b.center.z) && Finite(b.size.x) && Finite(b.size.y) && Finite(b.size.z);
+        static bool Finite(float n)=>!float.IsNaN(n) && !float.IsInfinity(n);
+        public static GameObject Default(int world)=>LibraryWorldArt.Floor(world)??OpenWorldArt.Asset(defaults[world]);
         public static Transform Fit(GameObject source,Transform parent,Vector3 center,Vector3 size)
         {
             if(source==null)return null;var data=Normalized(source);var go=new GameObject("Asset · "+source.name,typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(parent,false);go.transform.localPosition=center;go.transform.localScale=size;
@@ -47,7 +60,7 @@ namespace TreasureRunner
             var result=new Mesh{name="Normalized asset "+source.name};var instances=new List<CombineInstance>();foreach(var mesh in meshes)instances.Add(new CombineInstance{mesh=mesh,transform=Matrix4x4.identity});result.CombineMeshes(instances.ToArray(),false,true);
             foreach(var mesh in meshes)Object.Destroy(mesh);Object.Destroy(copy);data=new Shape{mesh=result,materials=mats.ToArray()};normalized[source]=data;return data;
         }
-        public static bool Attach(GameObject platform,GameObject source,Material side)
+        public static bool Attach(GameObject platform,GameObject source,Material side,bool matchCollision=false)
         {
             if(source==null)return false;var data=Normalized(source);Vector3 scale=platform.transform.localScale;float width=Mathf.Abs(scale.x),depth=Mathf.Abs(scale.y),cap=Mathf.Min(.65f,depth);
             var all=new List<CombineInstance>();var materials=new List<Material>();
@@ -67,7 +80,15 @@ namespace TreasureRunner
             var output=new Mesh{name="Asset building blocks · "+source.name};output.indexFormat=UnityEngine.Rendering.IndexFormat.UInt32;output.CombineMeshes(all.ToArray(),false,true);
             foreach(var piece in all)Object.Destroy(piece.mesh);
             platform.GetComponent<MeshFilter>().sharedMesh=output;platform.GetComponent<Renderer>().sharedMaterials=materials.ToArray();
-            var owner=platform.GetComponent<OwnedBlockMesh>()??platform.AddComponent<OwnedBlockMesh>();owner.Replace(output);return true;
+            var owner=platform.GetComponent<OwnedBlockMesh>()??platform.AddComponent<OwnedBlockMesh>();owner.Replace(output);
+            if(matchCollision)
+            {
+                var solid=source.GetComponent<LibraryTileCollision>();Mesh collision=output;
+                if(solid!=null && solid.shape!=null){collision=Object.Instantiate(solid.shape);owner.ReplaceCollision(collision);}
+                foreach(var collider in platform.GetComponents<Collider>()){collider.enabled=false;Object.Destroy(collider);}
+                var precise=platform.AddComponent<MeshCollider>();precise.sharedMesh=collision;
+            }
+            return true;
         }
         static Mesh Box(float top)
         {

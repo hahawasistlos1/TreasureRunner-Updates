@@ -14,17 +14,17 @@ namespace TreasureRunner
         }
     }
     [DefaultExecutionOrder(-100)]
-    [RequireComponent(typeof(Rigidbody),typeof(BoxCollider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class MovingRide : MonoBehaviour
     {
-        public Vector3 travel=new Vector3(0,2.6f,0); public float period=4;
+        public Vector3 travel=new Vector3(0,2.6f,0); public float period=4;public bool EditorPreview;
         Vector3 origin;Rigidbody body;float elapsed;
         public Vector3 Velocity {get;private set;}
-        void Awake(){body=GetComponent<Rigidbody>();body.isKinematic=true;body.useGravity=false;body.interpolation=RigidbodyInterpolation.Interpolate;body.collisionDetectionMode=CollisionDetectionMode.ContinuousSpeculative;GetComponent<BoxCollider>().isTrigger=false;}
+        void Awake(){body=GetComponent<Rigidbody>();body.isKinematic=true;body.useGravity=false;body.interpolation=RigidbodyInterpolation.Interpolate;body.collisionDetectionMode=CollisionDetectionMode.ContinuousSpeculative;if(GetComponent<Collider>()==null)gameObject.AddComponent<BoxCollider>();foreach(var collider in GetComponents<Collider>())collider.isTrigger=false;}
         void Start(){origin=body.position;}
         void FixedUpdate()
         {
-            var run=LevelRun.Instance;Velocity=Vector3.zero;if(run==null || !run.IsPlaying)return;
+            var run=LevelRun.Instance;Velocity=Vector3.zero;if(!EditorPreview && (run==null || !run.IsPlaying))return;
             elapsed+=Time.fixedDeltaTime;
             Vector3 next=origin+travel*((1-Mathf.Cos(elapsed*Mathf.PI*2/Mathf.Max(.5f,period)))*.5f);
             Velocity=(next-body.position)/Time.fixedDeltaTime;body.MovePosition(next);
@@ -67,13 +67,13 @@ namespace TreasureRunner
     public enum EnemyTactic { Hopper, Charger }
     public class EnemyTactics : MonoBehaviour
     {
-        public EnemyTactic tactic; public int Actions{get;private set;}public bool WindingUp{get;private set;}
+        public EnemyTactic tactic; public bool EditorPreview;public int Actions{get;private set;}public bool WindingUp{get;private set;}
         Enemy enemy;EnemyPatrol patrol;float speed,next,phase;Vector3 rest;bool dashing;
         void Start(){enemy=GetComponent<Enemy>();patrol=GetComponent<EnemyPatrol>();speed=enemy.speed;rest=transform.position;next=Time.time+1;}
         void Update()
         {
-            var run=LevelRun.Instance;if(run==null || !run.IsPlaying || enemy.IsDefeated || run.Player==null)return;
-            float distance=Vector3.Distance(run.Player.transform.position,transform.position);
+            var run=LevelRun.Instance;if(enemy.IsDefeated || (!EditorPreview && (run==null || !run.IsPlaying || run.Player==null)))return;
+            float distance=EditorPreview ? 3 : Vector3.Distance(run.Player.transform.position,transform.position);
             if(tactic==EnemyTactic.Hopper)
             {
                 if(distance<7 && Time.time>=next){phase=Time.time;next=Time.time+2.1f;Actions++;}
@@ -83,8 +83,8 @@ namespace TreasureRunner
             }
             if(WindingUp && Time.time>=phase){WindingUp=false;dashing=true;patrol.Suspended=false;enemy.speed=speed*3.8f;phase=Time.time+.65f;Actions++;}
             if(dashing && Time.time>=phase){dashing=false;enemy.speed=speed;next=Time.time+2.4f;}
-            if(!WindingUp && !dashing && distance<6 && Mathf.Abs(run.Player.transform.position.y-transform.position.y)<1.5f && Time.time>=next)
-            {WindingUp=true;patrol.Suspended=true;phase=Time.time+.8f;GameEffects.Spark(transform.position+Vector3.up*.7f);}
+            if(!WindingUp && !dashing && distance<6 && (EditorPreview || Mathf.Abs(run.Player.transform.position.y-transform.position.y)<1.5f) && Time.time>=next)
+            {WindingUp=true;patrol.Suspended=true;phase=Time.time+.8f;if(!EditorPreview)GameEffects.Spark(transform.position+Vector3.up*.7f);}
         }
     }
 }

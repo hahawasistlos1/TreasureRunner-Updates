@@ -3,8 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Reflection;
-[assembly:AssemblyVersion("0.9.0.0")]
-[assembly:AssemblyFileVersion("0.9.0.0")]
+[assembly:AssemblyVersion("0.10.0.0")]
+[assembly:AssemblyFileVersion("0.10.0.0")]
 [assembly:AssemblyProduct("TreasureRunner Windows-Werkzeuge")]
 static class Launcher
 {

@@ -16,6 +16,7 @@ namespace TreasureRunner
         public static bool IsOwner(string login)=>string.Equals(login,"hahawasistlos1",StringComparison.OrdinalIgnoreCase);
         public const string LegacyPath="community/catalog.json", AssetPath="community/catalog-v2.json", NextPath="community/catalog-v3.json";
         public const int Protocol=4;
+        public const int MaxCatalogBytes=2097152;
         public const string CurrentPath="community/"+ReleaseInfo.Version+"/catalog.json";
         public const string Empty="{\"version\":1,\"moderationProtocol\":4,\"gameVersion\":\""+ReleaseInfo.Version+"\",\"levels\":[]}";
         public static string WriteBody(string message,string json,string sha)
@@ -24,7 +25,7 @@ namespace TreasureRunner
             return string.IsNullOrEmpty(sha) ? JsonUtility.ToJson(new CatalogCreate{message=message,content=content}) : JsonUtility.ToJson(new CatalogWrite{message=message,content=content,sha=sha});
         }
         public static readonly string[] CatalogPaths={CurrentPath};
-        public static bool CanPublish(CommunityLevel level)=>LevelCodec.Validate(level,out _);
+        public static bool CanPublish(CommunityLevel level)=>LevelCodec.Validate(level,out _) && (level.format<=3 || ReleaseInfo.Version!="0.9.0");
         public static string PathFor(CommunityLevel l)=>CurrentPath;
         public static bool Compatible(CommunityCatalog catalog)=>catalog!=null && catalog.moderationProtocol==Protocol && catalog.gameVersion==ReleaseInfo.Version;
         public static CommunityCatalog ReadCurrentCatalog(string json)
@@ -55,7 +56,7 @@ namespace TreasureRunner
         }
         public static CommunityCatalog ReadCatalog(string json)
         {
-            if(json==null || System.Text.Encoding.UTF8.GetByteCount(json)>262144)throw new FormatException("Katalog zu groß.");
+            if(json==null || System.Text.Encoding.UTF8.GetByteCount(json)>MaxCatalogBytes)throw new FormatException("Katalog zu groß.");
             var catalog=JsonUtility.FromJson<CommunityCatalog>(json);
             if(catalog==null || catalog.version!=1 || catalog.levels==null || catalog.levels.Length>30)throw new FormatException("Ungültiger Katalog.");
             var ids=new HashSet<string>();
@@ -66,6 +67,7 @@ namespace TreasureRunner
         public static string Merge(string json,CommunityLevel level,string expectedHash)
         {
             if(!LevelCodec.Validate(level,out var why))throw new FormatException(why);
+            if(!CanPublish(level))throw new InvalidOperationException("Neue Asset-Level sind vor Veröffentlichung einer passenden Spielversion nur lokal testbar.");
             if(string.IsNullOrWhiteSpace(level.id))throw new FormatException("Level-ID fehlt.");
             if(EditorTestSession.Fingerprint(level)!=expectedHash)throw new InvalidOperationException("Diese Fassung wurde inzwischen geändert. Neu laden.");
             var catalog=ReadCurrentCatalog(json);var list=catalog.levels.ToList();int old=list.FindIndex(l=>l.id==level.id);

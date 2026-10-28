@@ -51,6 +51,7 @@ namespace TreasureRunner
             var knob=GameUI.Rect("Daumen",joystickRect);knob.anchorMin=knob.anchorMax=knob.pivot=new Vector2(.5f,.5f);knob.sizeDelta=Vector2.one*68;
             var knobGraphic=knob.gameObject.AddComponent<ControlGlyph>();knobGraphic.shape=ControlGlyph.Shape.Disc;knobGraphic.color=new Color(.27f,.76f,.69f);knobGraphic.raycastTarget=false;
             ControlGlyph.Add(knob,"Griff",ControlGlyph.Shape.Ring,new Color(.8f,1,.93f),8);
+            LibraryTheme.Control(joystickRect,"joystick_circle_pad_a");LibraryTheme.Control(knob,"joystick_circle_nub_a");
             var joystick=joystickRect.gameObject.AddComponent<VirtualJoystick>();joystick.player=run.Player.GetComponent<PlayerMovement>();joystick.knob=knob;
             arrowRoot=GameUI.Rect("Bewegungspfeile",controls);GameUI.Stretch(arrowRoot);
             leftArrow=DirectionAction("Links",-1,new Vector2(80,106));rightArrow=DirectionAction("Rechts",1,new Vector2(204,106));

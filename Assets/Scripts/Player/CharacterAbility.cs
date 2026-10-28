@@ -8,7 +8,7 @@ namespace TreasureRunner
         float nextReady;
         public int Rank=>CharacterSkills.Level(CharacterId);
         public float Remaining=>Mathf.Max(0,nextReady-Time.time);
-        void Awake(){CharacterId=CharacterCatalog.Current.id;}
+        void Awake(){CharacterId=CharacterCatalog.Current.abilityId;}
         bool CanTrigger=>Rank>0 && Remaining<=0 && LevelRun.Instance!=null && LevelRun.Instance.Player!=null && LevelRun.Instance.Player.gameObject==gameObject && LevelRun.Instance.IsPlaying;
         public float MagnetRange=>CharacterId=="goblin" ? Rank*.5f : 0;
         public string Status=>CharacterSkills.Title(CharacterId)+" "+Rank+"/3 · "+(Rank==0 ? "im Shop kaufen" : CharacterId=="goblin" ? "automatisch" : Remaining>0 ? Mathf.CeilToInt(Remaining)+" s" : "bereit");

@@ -49,11 +49,12 @@ namespace TreasureRunner
             GameUI.WrappedText("Schwert, Axt, Bogen und Runenstab kann jede Figur nutzen. Ihre Spezialwaffe und Fähigkeit machen die Figuren unterschiedlich.",info,20,GameUI.Muted);
             MenuShopPages.Abilities(page,menu,CharacterCatalog.Current.id);
             GameUI.Text("FIGURAUSWAHL",page,26,GameUI.Gold);
-            for(int line=0;line<2;line++)
+            for(int line=0;line<(CharacterCatalog.All.Length+1)/2;line++)
             {
                 var choices=GameUI.Row(page,210);choices.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
                 for(int column=0;column<2;column++)
                 {
+                    if(line*2+column>=CharacterCatalog.All.Length)break;
                     var character=CharacterCatalog.All[line*2+column];bool selected=CharacterCatalog.Current.id==character.id;
                     var card=GameUI.Panel(character.title,choices,FantasyMenu.Surface);var size=card.gameObject.AddComponent<LayoutElement>();size.preferredWidth=0;size.flexibleWidth=1;FantasyMenu.Frame(card.GetComponent<Image>(),selected);
                     var portrait=FantasyMenu.Region(card,"Figurenporträt",.025f,.13f,.20f,.76f);portrait.gameObject.AddComponent<RawImage>();var display=portrait.gameObject.AddComponent<CharacterPreview>();display.characterId=character.id;display.staticImage=true;
@@ -79,6 +80,7 @@ namespace TreasureRunner
             GameUI.Text("Spielversion "+Application.version,page,24,GameUI.Gold);
             GameUI.Button("Updates prüfen / Download anzeigen",page,()=>{GameUpdateClient.Instance?.OpenStatus();menu.Notify(GameUpdateClient.Instance!=null ? GameUpdateClient.Instance.LastStatus : "Updates werden vorbereitet");});
             BackgroundUpdatePanel.Build(page,menu);
+            GameUI.Button("Assetbibliothek · Bilder und Audio",page,()=>LibraryMediaBrowser.Open());
 
             Slider(page,"Musik",ProgressStore.Data.musicVolume,value =>
             { ProgressStore.Data.musicVolume = value; GameAudio.Instance?.ApplyVolumes(); ProgressStore.Save(); });

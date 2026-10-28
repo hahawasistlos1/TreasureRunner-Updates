@@ -9,7 +9,7 @@ namespace TreasureRunner
         [Serializable]class Issue{public string body;}
         public static bool IsReference(string value,out int number)
         {
-            number=0;if(!Uri.TryCreate(value.Trim(),UriKind.Absolute,out var uri) || uri.Scheme!="https" || uri.Host!="github.com")return false;
+            number=0;if(!Uri.TryCreate(SharedLinkInput.Extract(value),UriKind.Absolute,out var uri) || uri.Scheme!="https" || uri.Host!="github.com" || !uri.IsDefaultPort || uri.UserInfo!="")return false;
             var parts=uri.AbsolutePath.Trim('/').Split('/');return parts.Length==4 && parts[0]=="hahawasistlos1" && parts[1]=="TreasureRunner-Updates" && parts[2]=="issues" && int.TryParse(parts[3],out number) && number>0;
         }
         public void Fetch(int number,Action<CommunityLevel> accept,Action<string> status)=>StartCoroutine(Download(number,accept,status));

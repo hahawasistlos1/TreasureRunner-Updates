@@ -147,6 +147,49 @@ public static class TreasureRunnerCampaignSetup
     [MenuItem("TreasureRunner/Android APK erstellen")]
     // User rule: build, version increment and publication each require an explicit request.
     public static void BuildAndroid()=>BuildAndroidInternal(TreasureRunner.ReleaseInfo.Version,TreasureRunner.ReleaseInfo.AndroidCode,TreasureRunner.ReleaseInfo.Output+"/TreasureRunner.apk");
+    // Explicitly authorized local test build. Never use the immutable release output.
+    public static void BuildLiveEditorTest()
+    {
+        string version=PlayerSettings.bundleVersion;int code=PlayerSettings.Android.bundleVersionCode;
+        const string output="Builds/LiveEditor-Test/TreasureRunner-Test.apk";
+        Directory.CreateDirectory(Path.GetDirectoryName(output));
+        BuildAndroidInternal(version,code,output);
+        if(PlayerSettings.bundleVersion!=version || PlayerSettings.Android.bundleVersionCode!=code)
+            throw new InvalidOperationException("Test build unexpectedly changed the app version.");
+        File.WriteAllText("Logs/LiveEditor/TestApkBuild.txt","Local test APK succeeded.\nPath: "+output+"\nVersion unchanged: "+version+" / "+code+"\nNot published.");
+    }
+    public static void BuildBowFixTest()
+    {
+        string version=PlayerSettings.bundleVersion;int code=PlayerSettings.Android.bundleVersionCode;
+        const string output="Builds/BowFix-Test/TreasureRunner-BowFix-Test.apk";
+        Directory.CreateDirectory(Path.GetDirectoryName(output));Directory.CreateDirectory("Logs/WeaponPose");
+        BuildAndroidInternal(version,code,output);
+        if(PlayerSettings.bundleVersion!=version || PlayerSettings.Android.bundleVersionCode!=code)
+            throw new InvalidOperationException("Bow fix test changed the app version.");
+        File.WriteAllText("Logs/WeaponPose/TestApkBuild.txt","Local bow fix test APK succeeded.\nPath: "+output+"\nVersion unchanged: "+version+" / "+code+"\nNot published.");
+    }
+    public static void BuildEditorCommunityTest()
+    {
+        string version=PlayerSettings.bundleVersion;int code=PlayerSettings.Android.bundleVersionCode;
+        const string output="Builds/EditorCommunity-Test/TreasureRunner-EditorCommunity-Test.apk";
+        if(File.Exists(output))throw new InvalidOperationException("Existing test APK must be preserved.");
+        Directory.CreateDirectory(Path.GetDirectoryName(output));Directory.CreateDirectory("Logs/EditorCommunity/TestApk");
+        BuildAndroidInternal(version,code,output);
+        if(PlayerSettings.bundleVersion!=version || PlayerSettings.Android.bundleVersionCode!=code)
+            throw new InvalidOperationException("Editor/community test changed the app version.");
+        File.WriteAllText("Logs/EditorCommunity/TestApk/Build.txt","Local editor/community test APK succeeded.\nPath: "+output+"\nVersion unchanged: "+version+" / "+code+"\nNot published.");
+    }
+    public static void BuildWorkspaceR2Test()
+    {
+        string version=PlayerSettings.bundleVersion;int code=PlayerSettings.Android.bundleVersionCode;
+        const string output="Builds/EditorWorkspace-R2-Test/TreasureRunner-Workspace-R2-Test.apk";
+        if(File.Exists(output))throw new InvalidOperationException("Existing test APK must be preserved.");
+        Directory.CreateDirectory(Path.GetDirectoryName(output));Directory.CreateDirectory("Logs/EditorWorkspace-R2/TestApk");
+        BuildAndroidInternal(version,code,output);
+        if(PlayerSettings.bundleVersion!=version || PlayerSettings.Android.bundleVersionCode!=code)
+            throw new InvalidOperationException("Workspace test changed the app version.");
+        File.WriteAllText("Logs/EditorWorkspace-R2/TestApk/Build.txt","Local corrected workspace test APK succeeded.\nPath: "+output+"\nVersion unchanged: "+version+" / "+code+"\nNot published.");
+    }
     public static void BuildUpdateTestClient()
     {
         string previous=PlayerSettings.bundleVersion;int code=PlayerSettings.Android.bundleVersionCode;

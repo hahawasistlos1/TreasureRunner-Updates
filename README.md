@@ -1,27 +1,27 @@
 # TreasureRunner
 
-Android-Jump-and-Run mit acht Welten, 80 Kampagnenleveln, acht Waffen, Figurenfähigkeiten und einem gemeinsamen Welteneditor.
+Android-Jump-and-Run mit acht Welten, 80 Kampagnenleveln, acht Waffen, Figurenfähigkeiten und gemeinsamem Welteneditor.
 
-## Version 0.9.0
+## Version 0.10.0
 
-- [Android-APK](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.9.0/TreasureRunner.apk)
-- [Windows-Welteneditor](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.9.0/TreasureRunner-Windows-Editor.zip)
-- [Änderungen und Release](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/tag/v0.9.0)
-- [Eigener Spielcode direkt im Git-Repository](Assets/Scripts)
-- [Anleitung zum Windows-Editor](Documentation/Windows-Welteneditor-0.9.md)
+- [Android-APK](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.10.0/TreasureRunner.apk)
+- [Windows-Welteneditor](https://github.com/hahawasistlos1/TreasureRunner-Updates/releases/download/v0.10.0/TreasureRunner-Windows-Editor.zip)
+- [Änderungen und Prüfgrenzen](Documentation/Release-0.10.0.md)
+- [Windows-Anleitung](Documentation/Windows-Welteneditor-0.10.md)
+- [Eigener Spielcode](Assets/Scripts)
 
-Das öffentliche Windows-Programm enthält ausschließlich den Welteneditor. Testspielen ist freiwillig; **Einreichen** schickt ein Level zur Entscheidung an den Betreiber. Nur hahawasistlos1 gibt Level öffentlich frei. Die separate Verwaltung wird nicht als Download verteilt. Android und die aktuelle Verwaltung nutzen ausschließlich `community/0.9.0/catalog.json` mit Protokoll 4 und passender Spielversion. Alte Verwaltungsprogramme können die neue Community-Auswahl über ihre alten Kataloge nicht ändern. Vorhandene eigene Codes/Bauplätze bleiben importierbar.
+Neuer Vollbildeditor mit Zahnrad für die gemeinsame Assetpalette und getrenntem Funktionsmenü. Leere Welt mit bis zu 384 × 32 Feldern und 2400 Bauteilen; Bauen und Löschen bei laufender Gegner-/Fallensimulation, verschiebbare Ansicht und Randscrollen. Eigene Bauplätze werden ausdrücklich gespeichert und geladen. Testspielen ist freiwillig, Einreichen führt zur Betreiberentscheidung. [Assetbibliothek und Quellen](Documentation/Assetbibliothek-0.10.md).
 
-Größere und selbst skalierbare Touch-Tasten, zusätzliche Waffen und Fähigkeiten, korrigierte bewegliche Plattformen, automatische Datenpatches ohne Rücknahme und Hintergrund-Updatebenachrichtigungen sind enthalten. APK-Installation bleibt manuell; Android steuert die Zeitpunkte der Hintergrundprüfungen. Kein neuer Spielstandsreset. Die APK wurde auf einem A55 aktualisiert; Google-Profil und Wiederherstellung nach App-Neustart sind geprüft. Eigene Leveldateien blieben unverändert. Kein vollständiger Durchspieltest aller 80 Level.
+Die separate Verwaltung bleibt beim Betreiber und gehört nicht zum öffentlichen Windows-Download. APK und aktuelle Verwaltung verwenden ausschließlich community/0.10.0/catalog.json mit Protokoll4 und passender Spielversion. Alte Werkzeuge schreiben ihre bisherigen Kataloge. Eigene ältere Level bleiben importierbar; kein neuer Spielstandsreset.
 
-Google-Anmeldung mit selbst gewähltem Nickname ist für Android eingerichtet und auf dem A55 geprüft. Das Spielprofil zeigt keine Google-E-Mail, keinen Google-Profilnamen und kein Profilbild. Firebase läuft im kostenlosen Spark-Tarif, die Nickname-Datenbank liegt in Europa (eur3). Freunde/Spielstände werden nicht automatisch online synchronisiert. [Einrichtung und Datenfluss](Documentation/Google-Anmeldung-Nickname.md).
+Geheimtüren verschwinden nach Schatzfund und Verlassen für den Versuch. Jägerbogen bei Richtungswechseln und Upgrades korrigiert. Freigegebene Community-Level bieten Sterne und optionale Kommentare unter eigenem Nickname. Google-Anmeldung ist eingerichtet; keine Google-E-Mail oder Provider-Profilnamen im Spielprofil. Firebase Spark/Europa eur3; keine Cloud-Spielstandssynchronisierung. Der neue Katalog startet leer, daher noch kein regulärer öffentlicher Bewertungsschreibtest.
 
-## Quellen als Git-Dateien
+## Quellen und Lizenzen
 
-Eigener C#-/Java-/Shader-Code, Editoren, Build-/Prüfwerkzeuge, eigene Menügrafiken und Schriften mit Lizenzen stehen direkt in der Git-Historie. Kein zusätzlicher Source-ZIP-Anhang. Dies ist ein Quellcode-Auszug, **kein vollständig startfertiges Unity-Projekt**: fremde Originalmodelle, ursprüngliche Szenengrundlage und Unity-Pakete müssen rechtmäßig ergänzt werden. Originalmodelle aus dem Asset Store, private Signierschlüssel, Tokens, Spielstände und Build-Caches werden nicht veröffentlicht. Für den eigenen Code wird keine zusätzliche Open-Source-Lizenz eingeräumt. [Credits und Asset-Quellen](Documentation/Credits.md).
+Eigener C#-/Java-/Shader-Code, Editor- und Buildwerkzeuge, eigene Menügrafiken und lizenzierte Schriften stehen als Git-Dateien bereit. Kein zusätzlicher Source-ZIP-Anhang. Dieser Quellcode-Auszug ist kein vollständig startfertiges Unity-Projekt: fremde Originalmodelle, ursprüngliche Szenen und benötigte Unity-Pakete sind rechtmäßig zu ergänzen. Keine privaten Signierschlüssel, Tokens, Spielstände oder Build-Caches. Für eigenen Code wird keine zusätzliche Open-Source-Lizenz eingeräumt. [Credits](Documentation/Credits.md).
 
-Entwicklungsumgebung: Unity 6000.3.17f1 / URP, Android ARM64 ab API 26 und Windows x64. Aktuelle Build-Einstiege: `TreasureRunnerRelease09.Android`, `.WindowsEditor`, `.WindowsAdmin`. `.WindowsAdmin` ist eine eigene lokale Ausgabe und kein Teil des öffentlichen Windows-Pakets. Die Repository-Schreibrechte schützen die Freigaben auch dann, wenn jemand den öffentlich einsehbaren Verwaltungscode selbst kompiliert. Builds/Versionserhöhungen/Veröffentlichungen nur auf ausdrücklichen Besitzerauftrag.
+Unity6000.3.17f1/URP, Android ARM64 ab API26, Windows x64. Build-Einstiege TreasureRunnerRelease10.Android, .WindowsEditor, .WindowsAdmin. Verwaltungscode ist einsehbar; öffentliche Freigaben werden durch die GitHub-Schreibrechte des Betreibers geschützt.
 
 ## Einladungen und Updates
 
-Die [Einladungsseite](https://hahawasistlos1.github.io/treasurerunner/invite/) öffnet unterstützte Apps oder bietet den offiziellen APK-Download. Nach Installation dieselbe Einladung erneut öffnen. Kleine Datenpatches verändern nur unterstützte Daten; neuer Code und neue Assets benötigen eine APK. Derzeit wird mit 0.9.0 kein zusätzlicher Datenpatch veröffentlicht.
+Die [Einladungsseite](https://hahawasistlos1.github.io/treasurerunner/invite/) öffnet die App oder bietet den offiziellen Latest-APK-Download. Nach Installation dieselbe Einladung erneut öffnen. Kleine Datenpatches verändern nur unterstützte Daten; neuer Code und neue Assets benötigen eine APK. 0.10.0 ist ein normales APK-Update, kein zusätzlicher Datenpatch. Download über die bestehende Updatefunktion, Android-Installation manuell; Hintergrundprüfungen unterliegen Android-Zeitplänen und Berechtigungen.

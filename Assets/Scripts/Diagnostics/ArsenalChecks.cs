@@ -63,7 +63,7 @@ namespace TreasureRunner
             d.weaponUpgrades=new[]{1,2,3,1};int oldWallet=d.coins;WeaponUpgrades.Buy("spear");Check(d.weaponUpgrades.Length==8 && d.weaponUpgrades.Take(4).SequenceEqual(new[]{1,2,3,1}) && d.weaponUpgrades[4]==1 && d.coins==oldWallet-350,"Buying a new weapon rank expands old array while retaining all four ranks");
             Cleared(0);Check(WeaponUpgrades.Level("bow")==3 && CharacterSkills.StoredLevel("goblin")==3,"Already bought weapon and ability ranks are never revoked by new gates");Cleared(72);
             d.characterSkills=new int[4];d.weaponUpgrades=new int[8];d.coins=12345;d.weapons=config.weapons.Select(w=>w.id).ToList();
-            foreach(var character in CharacterCatalog.All)
+            foreach(var character in CharacterCatalog.All.Where(c=>c.id==c.abilityId))
             {
                 CharacterCatalog.Select(character.id);string signature=config.weapons.Single(w=>ArsenalProgression.Owner(w.id)==character.id).id;
                 ShopService.Equip(signature);Check(d.equippedWeapon==signature,"Owner can equip signature: "+character.id);

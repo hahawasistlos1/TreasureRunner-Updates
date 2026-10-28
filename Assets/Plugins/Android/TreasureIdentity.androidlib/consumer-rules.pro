@@ -1,1 +1,2 @@
 -keep class com.treasurerunner.identity.IdentityBridge { public static *; }
+-keep class com.treasurerunner.identity.CommunityReviewBridge { public static *; }

@@ -61,11 +61,25 @@ namespace TreasureRunner
             }
             else
             {
-                Check(FindFirstObjectByType<LevelEditorScreen>()!=null,"Windows level editor starts");Capture("Levelbau");
+                Check(FindFirstObjectByType<LevelEditorScreen>()!=null,"Windows level editor starts");FindFirstObjectByType<LevelEditorScreen>().LoadDocument(LevelCodec.Starter());yield return null;Capture("Levelbau");
+                var live=FindFirstObjectByType<EditorLevelScene>();yield return null;
+                for(int tab=0;tab<3;tab++)
+                {
+                    FindFirstObjectByType<LevelEditorScreen>().ToolMenu(tab);yield return null;Canvas.ForceUpdateCanvases();Capture("Funktionen-"+tab);
+                    foreach(var button in GameObject.Find("Dialog").GetComponentsInChildren<Button>())
+                    {
+                        var corners=new Vector3[4];((RectTransform)button.transform).GetWorldCorners(corners);
+                        Check(corners.All(p=>p.x>=0 && p.x<=Screen.width && p.y>=0 && p.y<=Screen.height),"Function control remains on screen: "+button.GetComponentInChildren<Text>()?.text);
+                    }
+                    BuilderTestNavigation.Button("Zurück zum Bauen").onClick.Invoke();yield return null;
+                }
+                Check(live!=null && live.GetComponent<RawImage>().texture is RenderTexture && live.VisibleTileCount>0,"Native Windows editor renders connected live level geometry");
+                Check(!live.Simulation,"Native Windows editor starts in precise build mode");live.SetSimulation(false);yield return null;
+                Check(!live.Geometry.GetComponentsInChildren<Collider>().Any(c=>c.enabled),"Native preview can be stopped for exact placement without interactions");live.SetSimulation(true);yield return null;
                 Check(Type.GetType("TreasureRunner.LevelModerationScreen, Assembly-CSharp")==null,"Public runtime does not ship the moderation screen");
-                var submit=FindObjectsByType<Button>(FindObjectsSortMode.None).First(b=>b.GetComponentInChildren<Text>()?.text=="Einreichen");submit.onClick.Invoke();yield return null;
+                var submit=BuilderTestNavigation.Button("Einreichen");submit.onClick.Invoke();yield return null;
                 Check(FindObjectsByType<Button>(FindObjectsSortMode.None).Any(b=>b.GetComponentInChildren<Text>()?.text=="GitHub-Einreichung öffnen"),"Untested valid draft may be submitted for owner approval");FindObjectsByType<Button>(FindObjectsSortMode.None).First(b=>b.GetComponentInChildren<Text>()?.text=="Zurück").onClick.Invoke();yield return null;
-                var palette=FindObjectsByType<Button>(FindObjectsSortMode.None).FirstOrDefault(b=>b.GetComponentInChildren<Text>()?.text=="Bauteil wählen");palette.onClick.Invoke();yield return null;Capture("Bauteile");
+                var palette=GameObject.Find("Bauteile").GetComponent<Button>();palette.onClick.Invoke();yield return null;Capture("Bauteile");
                 Check(BuilderPalette.Entries.Count>100,"Shared runtime catalog includes imported models and existing enemies");
                 foreach(string category in BuilderPalette.Categories)
                 {
@@ -89,7 +103,7 @@ namespace TreasureRunner
         }
         void Capture(string name)
         {
-            var camera=Camera.main ?? FindFirstObjectByType<Camera>();if(camera==null)return;
+            var camera=Camera.main ?? FindObjectsByType<Camera>(FindObjectsSortMode.None).FirstOrDefault(c=>c.enabled && c.targetTexture==null);if(camera==null)return;
             var canvases=FindObjectsByType<Canvas>(FindObjectsSortMode.None);var modes=canvases.Select(c=>c.renderMode).ToArray();var cameras=canvases.Select(c=>c.worldCamera).ToArray();
             foreach(var c in canvases){c.renderMode=RenderMode.ScreenSpaceCamera;c.worldCamera=camera;c.planeDistance=1;}
             Canvas.ForceUpdateCanvases();var rt=new RenderTexture(1440,900,24);var old=camera.targetTexture;camera.targetTexture=rt;camera.Render();

@@ -17,7 +17,7 @@ namespace TreasureRunner
         public static string RequirementText(int required)=>Completed>=required ? "Freigeschaltet" : LockText(required)+" · aktuell "+Completed;
         public static string Owner(string id)=>id=="spear" ? "goblin" : id=="hammer" ? "skeleton-knight" : id=="crossbow" ? "skeleton-scout" : id=="froststaff" ? "skeleton-mage" : null;
         public static int SignatureUnlock(string id)=>id=="spear" ? 12 : id=="hammer" ? 28 : id=="crossbow" ? 44 : id=="froststaff" ? 68 : 0;
-        public static bool CanUse(string id,string character=null)=>Owner(id)==null || Owner(id)==(character??CharacterCatalog.Current.id);
+        public static bool CanUse(string id,string character=null)=>Owner(id)==null || Owner(id)==CharacterCatalog.Get(character??CharacterCatalog.Current.id).abilityId;
         public static bool IsMagic(string id)=>id=="staff" || id=="froststaff";
         public static bool IsArrow(string id)=>id=="bow" || id=="crossbow";
         public static bool BreaksArmor(string id)=>id=="axe" || id=="hammer" || IsMagic(id);

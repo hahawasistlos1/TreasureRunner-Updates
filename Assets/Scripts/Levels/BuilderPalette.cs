@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 namespace TreasureRunner
 {
-    public enum BuilderRole { Default,Block,Coin,Enemy,Decoration,Spikes,Saw,Weapon,Health,Shield }
+    public enum BuilderRole { Default,Block,Coin,Enemy,Decoration,Spikes,Saw,Weapon,Health,Shield,Cannon,Flame,Spring,FallingRock }
     public class BuilderAsset
     {
         public string id,title,category,prefab,weapon;public LevelTile kind;public BuilderRole role;
@@ -14,6 +14,7 @@ namespace TreasureRunner
     public static class BuilderPalette
     {
         static List<BuilderAsset> entries;
+        public static void Refresh(){entries=null;}
         public static IReadOnlyList<BuilderAsset> Entries=>entries??(entries=Create());
         public static BuilderAsset Get(string id)=>string.IsNullOrEmpty(id) ? null : Entries.FirstOrDefault(a=>a.id==id);
         public static bool IsDecoration(LevelBlock tile)=>Get(tile.asset)?.role==BuilderRole.Decoration;
@@ -47,6 +48,8 @@ namespace TreasureRunner
                 result.Add(item);
             }
             result.Add(new BuilderAsset{id="pickup.heart",title="Heilherz · +1 Herz",category="Beute",kind=LevelTile.Coin,role=BuilderRole.Health,prefab="OpenArt/Prefabs/Platformer_heart",format=3});
+            foreach(var item in AssetLibrary.Data.entries)
+                result.Add(new BuilderAsset{id=item.id,title=item.title,category=item.category,prefab=item.resource,weapon=item.weapon,kind=(LevelTile)item.kind,role=(BuilderRole)item.role,format=4});
             result.Add(new BuilderAsset{id="pickup.ward",title="Schutzschild · ein Treffer",category="Beute",kind=LevelTile.Coin,role=BuilderRole.Shield,prefab="OpenArt/Prefabs/sword_shield",format=3});
             result.Add(new BuilderAsset{id="enemy.skirmisher.cave",title="Kavernenspäher · weicht zurück",category="Gegner",kind=LevelTile.Shooter,role=BuilderRole.Enemy,prefab="OpenArt/Prefabs/Skeleton_Rogue",enemyWorld=4,retreat=true,format=3});
             result.Add(new BuilderAsset{id="enemy.skirmisher.castle",title="Zinnenschütze · weicht zurück",category="Gegner",kind=LevelTile.Shooter,role=BuilderRole.Enemy,prefab="OpenArt/Prefabs/Skeleton_Mage",enemyWorld=6,retreat=true,format=3});

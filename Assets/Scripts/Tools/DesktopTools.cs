@@ -21,7 +21,7 @@ namespace TreasureRunner
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Initialize()
         {
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
             var args=Environment.GetCommandLineArgs();
 #if TREASURERUNNER_ADMIN
             Mode=Array.IndexOf(args,"--level-editor")>=0 ? "editor" : "admin";

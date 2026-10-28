@@ -16,6 +16,39 @@ service cloud.firestore {
         && request.resource.data.schema == 1 && nicknameValid(request.resource.data.nickname);
       allow delete: if request.auth != null && request.auth.uid == uid;
     }
+    function reviewPath(level, uid) {
+      return /databases/$(database)/documents/levelReviews/$(level)/entries/$(uid);
+    }
+    function clockPath(uid) { return /databases/$(database)/documents/reviewWriters/$(uid); }
+    function levelValid(level) { return level.matches('^[a-f0-9]{64}$'); }
+    function clockFresh(uid, level) {
+      return getAfter(clockPath(uid)).data.at == request.time
+        && getAfter(clockPath(uid)).data.level == level
+        && (!exists(clockPath(uid)) || request.time >= get(clockPath(uid)).data.at + duration.value(60, 's'));
+    }
+    match /reviewWriters/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow list, delete: if false;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['at','level'])
+        && levelValid(request.resource.data.level) && clockFresh(uid, request.resource.data.level)
+        && getAfter(reviewPath(request.resource.data.level, uid)).data.updatedAt == request.time;
+    }
+    match /levelReviews/{level}/entries/{uid} {
+      allow get: if levelValid(level);
+      allow list: if levelValid(level) && request.query.limit <= 20;
+      allow create, update: if request.auth != null && request.auth.uid == uid && levelValid(level)
+        && request.resource.data.keys().hasAll(['nickname','stars','comment','revision','updatedAt'])
+        && request.resource.data.keys().hasOnly(['nickname','stars','comment','revision','updatedAt'])
+        && request.resource.data.nickname == get(/databases/$(database)/documents/players/$(uid)).data.nickname
+        && nicknameValid(request.resource.data.nickname)
+        && request.resource.data.stars is int && request.resource.data.stars >= 1 && request.resource.data.stars <= 5
+        && request.resource.data.revision is int && request.resource.data.revision >= 1 && request.resource.data.revision <= 10000
+        && request.resource.data.comment is string && request.resource.data.comment.size() <= 400
+        && request.resource.data.comment.matches('^[^\\x00-\\x09\\x0B-\\x1F\\x7F\\x{202E}]*$')
+        && request.resource.data.updatedAt == request.time && clockFresh(uid,level);
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
     match /{document=**} { allow read, write: if false; }
   }
 }

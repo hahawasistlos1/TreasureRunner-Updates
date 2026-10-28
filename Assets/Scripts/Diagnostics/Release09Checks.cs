@@ -40,7 +40,7 @@ namespace TreasureRunner
             var missingGoal=LevelCodec.Decode(LevelCodec.Encode(draft));missingGoal.tiles.RemoveAll(t=>t.kind==LevelTile.Goal);Reject(()=>LevelModeration.Merge(LevelModeration.Empty,missingGoal,EditorTestSession.Fingerprint(missingGoal)),"Structural validation still rejects missing goal");
             Check(LevelCodec.Validate(LevelCodec.Decode(File.ReadAllText("Documentation/UserLevel-Issue-1.trl")),out _),"User submission remains importable without conversion");
             LevelRun.StartCustom(LevelCodec.Starter());yield return null;yield return null;yield return null;LevelRun.Instance.Menu();yield return null;yield return null;yield return null;
-            LevelEditorScreen.Working=draft;LevelEditorScreen.Open();yield return null;Button("Einreichen").onClick.Invoke();yield return null;
+            LevelEditorScreen.OpenDocument(draft);yield return null;Button("Einreichen").onClick.Invoke();yield return null;
             Check(FindObjectsByType<Button>(FindObjectsSortMode.None).Any(b=>b.GetComponentInChildren<Text>()?.text=="GitHub-Einreichung öffnen"),"Real editor opens submission dialog without a completed test");Button("Zurück").onClick.Invoke();yield return null;
             Check(!FindObjectsByType<Button>(FindObjectsSortMode.None).Any(b=>b.GetComponentInChildren<Text>()?.text=="Für alle freigeben …"),"Creator editor does not offer public approval");
             var administration=new GameObject("Admin UI test").AddComponent<LevelModerationScreen>();administration.Build();administration.StopAllCoroutines();

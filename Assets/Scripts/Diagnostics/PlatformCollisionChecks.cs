@@ -26,6 +26,7 @@ namespace TreasureRunner
         IEnumerator Scenarios()
         {
             var level=LevelCodec.Starter();level.format=2;level.tiles.Add(new LevelBlock{x=10,y=3,kind=LevelTile.Lift});level.tiles.Add(new LevelBlock{x=14,y=3,kind=LevelTile.Lift,asset="art.Platformer_block-moving"});Check(LevelCodec.Validate(level,out string fixtureReason),"Custom platform fixture validates: "+fixtureReason);
+            var libraryLift=AssetLibrary.Data.entries.FirstOrDefault(e=>e.role==(int)BuilderRole.Block && e.kind==(int)LevelTile.Lift);if(libraryLift!=null){level.format=4;level.tiles.Add(new LevelBlock{x=20,y=3,kind=LevelTile.Lift,asset=libraryLift.id});}
             LevelRun.StartCustom(level);yield return null;yield return null;yield return null;var run=LevelRun.Instance;var player=run.Player;var body=player.GetComponent<Rigidbody>();var movement=player.GetComponent<PlayerMovement>();var collider=player.GetComponent<Collider>();player.GrantInvulnerability(999);
             foreach(var ride in FindObjectsByType<MovingRide>(FindObjectsSortMode.None)){Check(ride.GetComponent<Rigidbody>().isKinematic && !ride.GetComponent<Collider>().isTrigger && ride.GetComponent<OneWayLedge>()==null,"Editor lift is a solid kinematic body: "+ride.name);ride.enabled=false;}
             var floor=Cube("Collision test floor",new Vector3(1000,-.5f,0),new Vector3(80,1,3));

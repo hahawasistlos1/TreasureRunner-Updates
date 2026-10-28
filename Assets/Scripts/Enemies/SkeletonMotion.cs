@@ -8,7 +8,7 @@ namespace TreasureRunner
         void Start()
         {
             animationPlayer=GetComponentInChildren<Animation>();enemy=GetComponent<Enemy>();patrol=GetComponent<EnemyPatrol>();
-            if(animationPlayer==null)return;
+            if(animationPlayer==null)return;animationPlayer.enabled=true;
             foreach(AnimationState state in animationPlayer)
             {
                 string n=state.name;if(n.Contains("Idle"))idle=n;if(n.Contains("Walking"))walk=n;

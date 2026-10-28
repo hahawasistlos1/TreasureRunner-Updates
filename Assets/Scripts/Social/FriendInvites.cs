@@ -26,7 +26,7 @@ namespace TreasureRunner
         }
         public static bool TryParse(string text,out FriendContact contact,out string reason)
         {
-            contact=null;reason="Das ist kein gültiger TreasureRunner-Einladungslink.";
+            contact=null;reason="Das ist kein gültiger TreasureRunner-Einladungslink.";text=SharedLinkInput.Extract(text);
             if(string.IsNullOrEmpty(text) || text.Length>MaxUrl || text.Any(char.IsControl) || !Uri.TryCreate(text,UriKind.Absolute,out var uri))return false;
             bool web=uri.Scheme=="https" && uri.Host=="hahawasistlos1.github.io" && uri.IsDefaultPort && uri.AbsolutePath=="/treasurerunner/invite/";
             bool app=uri.Scheme=="treasurerunner" && uri.Host=="invite" && uri.IsDefaultPort && (uri.AbsolutePath=="" || uri.AbsolutePath=="/");

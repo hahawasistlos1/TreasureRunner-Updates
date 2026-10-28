@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public UnityEvent onDefeated = new UnityEvent();
     public int CurrentHealth { get; private set; }
     public bool IsDefeated { get; private set; }
+    public bool EditorPreview {get;set;}
     private BoxCollider hitbox;
 
     private void Awake()
@@ -35,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     private void TouchPlayer(Collider other)
     {
-        if (IsDefeated || Time.timeScale == 0f) return;
+        if (EditorPreview || IsDefeated || Time.timeScale == 0f) return;
         Rigidbody player = other.attachedRigidbody;
         if (player == null || !player.CompareTag("Player")) return;
         PlayerHealth health = player.GetComponent<PlayerHealth>();
@@ -63,7 +64,7 @@ public class Enemy : MonoBehaviour
     // Shared damage entry point for future weapons.
     public void TakeDamage(int amount)
     {
-        if (IsDefeated || amount <= 0) return;
+        if (EditorPreview || IsDefeated || amount <= 0) return;
         CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
         if (CurrentHealth > 0) { onDamaged.Invoke(); return; }
         IsDefeated = true;

@@ -31,8 +31,8 @@ namespace TreasureRunner
             var hashes=artifactPaths.Select(Hash).ToArray();
             var camera=new GameObject("Menu test camera",typeof(Camera)).GetComponent<Camera>();camera.tag="MainCamera";camera.backgroundColor=GameUI.Ink;camera.clearFlags=CameraClearFlags.SolidColor;
             yield return null;yield return null;
-            var starter=LevelCodec.Starter();starter.title="Original";LevelEditorScreen.Working=starter;LevelEditorScreen.Open();yield return null;
-            var editor=FindFirstObjectByType<LevelEditorScreen>();var paint=FindFirstObjectByType<EditorPaintSurface>();
+            var starter=LevelCodec.Starter();starter.title="Original";LevelEditorScreen.OpenDocument(starter);yield return null;
+            var editor=FindFirstObjectByType<LevelEditorScreen>();var paint=FindFirstObjectByType<EditorLevelScene>();
             var states=new List<string>{LevelCodec.Encode(LevelEditorScreen.Working)};
             for(int i=0;i<100;i++){paint.paint(i%16,1+i/16);states.Add(LevelCodec.Encode(LevelEditorScreen.Working));}
             Button("Rückgängig").onClick.Invoke();Check(LevelCodec.Encode(LevelEditorScreen.Working)==states[99],"Undo after more than 60 changes restores the most recent edit");
@@ -44,7 +44,7 @@ namespace TreasureRunner
             editor.LoadDocument(starter);var title=Field<InputField>(editor,"titleInput");var author=Field<InputField>(editor,"authorInput");
             title.onEndEdit.Invoke("Neuer Titel");Button("Rückgängig").onClick.Invoke();Check(title.text=="Original" && LevelEditorScreen.Working.title=="Original","Undo synchronizes title field and actual level data");
             Button("Wiederholen").onClick.Invoke();Check(title.text=="Neuer Titel","Redo synchronizes title field");
-            Button("Breite +16").onClick.Invoke();Button("Rückgängig").onClick.Invoke();Check(LevelEditorScreen.Working.width==64,"Width change can be undone");
+            Button("Level einrichten").onClick.Invoke();Button("Breite +16").onClick.Invoke();yield return null;Button("Zurück zum Bauen").onClick.Invoke();yield return null;Button("Rückgängig").onClick.Invoke();Check(LevelEditorScreen.Working.width==64,"Width change can be undone");
             var second=LevelCodec.Starter();second.title="Zweiter Entwurf";second.author="Andere Person";editor.LoadDocument(second);
             Check(!Button("Rückgängig").interactable && !Button("Wiederholen").interactable && title.text==second.title && author.text==second.author,"Loading another draft clears cross-level history and updates both header fields");
             var heart=BuilderPalette.Get("pickup.heart");typeof(LevelEditorScreen).GetField("selectedAsset",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(editor,heart);typeof(LevelEditorScreen).GetField("tool",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(editor,(int)heart.kind);paint.paint(4,4);
@@ -56,8 +56,8 @@ namespace TreasureRunner
             Check(selectedLabel.rectTransform.rect.width>180 && pageLabel.rectTransform.rect.width>180 && selectedLabel.preferredHeight<=selectedLabel.rectTransform.rect.height+2 && pageLabel.preferredHeight<=pageLabel.rectTransform.rect.height+2,"Selected tool and page labels fit their available widths and heights: "+selectedLabel.rectTransform.rect.size+", "+pageLabel.rectTransform.rect.size);
             Capture("Editor-Verlauf");
             Button("Radierer").onClick.Invoke();paint.paint(4,4);Check(LevelEditorScreen.Working.format<=2 && LevelModeration.CanPublish(LevelEditorScreen.Working),"Removing every development object restores compatibility with existing clients");
-            var capped=LevelCodec.Starter();capped.width=96;capped.tiles.Clear();for(int i=0;i<650;i++)capped.tiles.Add(new LevelBlock{x=i%96,y=i/96,kind=i==61 ? LevelTile.Goal : LevelTile.Ground});editor.LoadDocument(capped);
-            Button("Start setzen").onClick.Invoke();paint.paint(14,10);Check(LevelEditorScreen.Working.tiles.Count==650 && LevelEditorScreen.Working.spawnX==2 && LevelEditorScreen.Working.spawnY==0,"Start tool cannot bypass the 650-tile limit");Button("Menü").onClick.Invoke();yield return null;
+            var capped=LevelCodec.Starter();capped.width=LevelCodec.MaxWidth;capped.format=5;capped.tiles.Clear();for(int i=0;i<LevelCodec.MaxTiles;i++)capped.tiles.Add(new LevelBlock{x=i%LevelCodec.MaxWidth,y=i/LevelCodec.MaxWidth,kind=i==61 ? LevelTile.Goal : LevelTile.Ground});editor.LoadDocument(capped);
+            Button("Start setzen").onClick.Invoke();paint.paint(14,10);Check(LevelEditorScreen.Working.tiles.Count==LevelCodec.MaxTiles && LevelEditorScreen.Working.spawnX==2 && LevelEditorScreen.Working.spawnY==0,"Start tool cannot bypass the extended tile limit");Button("Menü").onClick.Invoke();yield return null;
 
             var mock=new GameObject("Inactive update preview");mock.SetActive(false);var updater=mock.AddComponent<GameUpdateClient>();
             string notes=string.Join("\n",Enumerable.Range(0,75).Select(i=>"Änderung "+i+": Ein ausführlicher Text zu Bauteilen, Welten und Gegnern."))+"\nENDE DER ÄNDERUNGEN";

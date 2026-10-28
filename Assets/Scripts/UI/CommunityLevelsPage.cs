@@ -11,7 +11,7 @@ namespace TreasureRunner
     {
         public readonly MemoryStream bytes=new MemoryStream();
         public BoundedCatalogDownload():base(new byte[8192]){}
-        protected override bool ReceiveData(byte[] data,int length){if(data==null || bytes.Length+length>262144)return false;bytes.Write(data,0,length);return true;}
+        protected override bool ReceiveData(byte[] data,int length){if(data==null || bytes.Length+length>LevelModeration.MaxCatalogBytes)return false;bytes.Write(data,0,length);return true;}
         protected override byte[] GetData()=>bytes.ToArray();
         protected override string GetText()=>System.Text.Encoding.UTF8.GetString(bytes.ToArray());
     }
@@ -32,7 +32,7 @@ namespace TreasureRunner
             status=GameUI.Text("Lade Community-Auswahl …",content,22,GameUI.Muted);
             var searchBox=LevelEditorScreen.Input(content,"",60,52);var placeholder=GameUI.Text("Titel oder Ersteller suchen …",searchBox.transform,21,GameUI.Muted);GameUI.Stretch(placeholder.rectTransform,12,6,12,6);searchBox.placeholder=placeholder;
             searchBox.onValueChanged.AddListener(value=>{search=value;if(catalogJson!=null)ShowCatalog(catalogJson);});
-            GameUI.WrappedText("Spielen, im Editor öffnen und über Codes oder Links importieren ist verfügbar. Beliebtheitsranglisten und Bewertungen benötigen einen zusätzlichen Dienst und sind noch nicht verfügbar.",content,19,GameUI.Muted);
+            GameUI.WrappedText("Freigegebene Level spielen, mit 1–5 Sternen bewerten und öffentliche Kommentare lesen. Schreiben erfordert die Google-Anmeldung mit deinem selbst gewählten Nickname.",content,19,GameUI.Muted);
             var cached=Resources.Load<TextAsset>("CommunityStarter");if(cached!=null)ShowCatalog(cached.text);
             StartCoroutine(Fetch());
         }
@@ -50,17 +50,18 @@ namespace TreasureRunner
                 if(!LevelCodec.Validate(l,out _))continue;
                 if(!string.IsNullOrWhiteSpace(search) && ((l.title??"")+" "+(l.author??"")).IndexOf(search,StringComparison.OrdinalIgnoreCase)<0)continue;
                 count++;var level=l;
-                var row=GameUI.Row(listing,125);var info=GameUI.Column(row,2);
+                var card=GameUI.Column(listing,6);var row=GameUI.Row(card,90);var info=GameUI.Column(row,2);
                 GameUI.Text(l.title+" · v"+l.revision,info,24,GameUI.Gold);GameUI.Text(l.author+" · "+GameConfig.WorldNames[l.world],info,20,GameUI.Muted);
                 GameUI.Button("Spielen",row,()=>LevelRun.StartCustom(level),true,true);
-                GameUI.Button("Im Editor öffnen",row,()=>{LevelEditorScreen.Working=LevelCodec.Decode(LevelCodec.Encode(level));LevelEditorScreen.Open();});
-                GameUI.Button("Melden",row,()=>Application.OpenURL("https://github.com/hahawasistlos1/TreasureRunner-Updates/issues/new?title="+Uri.EscapeDataString("Level melden: "+level.title)+"&body="+Uri.EscapeDataString("Level-ID: "+level.id+"\nVersion: "+level.revision+"\nBitte beschreibe das Problem:")));
+                GameUI.Button("Im Editor öffnen",row,()=>LevelEditorScreen.OpenDocument(level));
+                var feedback=GameUI.Row(card,45);GameUI.Button("Sterne & Kommentare",feedback,()=>CommunityReviewPanel.Open(content.root,level));
+                GameUI.Button("Level melden",feedback,()=>Application.OpenURL("https://github.com/hahawasistlos1/TreasureRunner-Updates/issues/new?title="+Uri.EscapeDataString("Level melden: "+level.title)+"&body="+Uri.EscapeDataString("Level-ID: "+level.id+"\nVersion: "+level.revision+"\nBitte beschreibe das Problem:")));
             }
             status.text=count==0 ? "Keine passenden freigegebenen Level. Eigene Level über Code, GitHub-Link oder Bauplätze öffnen." : count+" freigegebene Level · Community-Auswahl";
         }
         void ShowImported(CommunityLevel l)
         {
-            LevelEditorScreen.Working=l;LevelEditorScreen.Open();menu.Notify("Level importiert: "+l.title+". Speichere es in einem freien Bauplatz.");
+            LevelEditorScreen.OpenDocument(l);menu.Notify("Level importiert: "+l.title+". Speichere es in einem freien Bauplatz.");
         }
         bool fetching;
         IEnumerator Fetch()

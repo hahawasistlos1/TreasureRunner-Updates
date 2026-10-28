@@ -15,7 +15,7 @@ namespace TreasureRunner
         public static RectTransform Card(Transform parent,string name,float x,float y,float w,float h)
         {var r=Region(parent,name,x,y,w,h);var image=r.gameObject.AddComponent<RoundedImage>();image.color=Surface;Frame(image);return r;}
         public static void Frame(Graphic image,bool gold=false)
-        {var o=image.gameObject.GetComponent<Outline>()??image.gameObject.AddComponent<Outline>();o.effectColor=gold ? GameUI.Gold : Border;o.effectDistance=new Vector2(1,-1);o.useGraphicAlpha=false;}
+        {var o=image.gameObject.GetComponent<Outline>()??image.gameObject.AddComponent<Outline>();o.effectColor=gold ? GameUI.Gold : Border;o.effectDistance=new Vector2(1,-1);o.useGraphicAlpha=false;if(image is Image panel && image.GetComponent<Button>()==null)LibraryTheme.Panel(panel);}
         public static Text Label(Transform parent,string value,int size,float x,float y,float w,float h,Color? color=null,bool title=false)
         {var t=GameUI.Text(value,parent,size,color);var r=t.rectTransform;r.anchorMin=new Vector2(x,y);r.anchorMax=new Vector2(x+w,y+h);r.offsetMin=r.offsetMax=Vector2.zero;t.alignment=TextAnchor.MiddleLeft;t.verticalOverflow=VerticalWrapMode.Truncate;t.resizeTextForBestFit=true;t.resizeTextMinSize=Mathf.Min(size,12);t.resizeTextMaxSize=size;if(title){t.font=TitleFont;t.fontStyle=FontStyle.Bold;}return t;}
         public static void Art(Transform parent,string path,float x,float y,float w,float h,Color? tint=null)

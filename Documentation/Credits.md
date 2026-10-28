@@ -35,3 +35,7 @@ Die Credits sind im Home-Menü und im Spielermenü erreichbar. Im Windows-Verwal
 
 Offizielle Quelle: https://kenney.nl/assets/platformer-kit
 CC0 1.0. Ausgewählte Originalmodelle: Bau- und Gras-/Schneeblöcke, Aufzug, Münzen, Stacheln, Säge, Sprungfeder und Requisiten. Original-Lizenz unter `Assets/Resources/OpenArt/Platformer/License.txt`. Dateiprüfsummen und Quellen im OpenArt-Manifest.
+
+## Erweiterte gemeinsame Assetbibliothek
+
+In Version 0.10.0 integrierte Erweiterung. Vollständige Quellen- und Paketübersicht: [Assetbibliothek-0.10.md](Assetbibliothek-0.10.md). Alle tatsächlich verwendeten Einzelpakete werden zusätzlich in den Spiel-Credits mit ihrer vollständigen Lizenz aufgeführt. Neu bezogene Dateien von Quaternius, Unity Asset Store oder Abstraction sind noch nicht enthalten.

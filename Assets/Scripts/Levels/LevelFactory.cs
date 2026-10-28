@@ -32,7 +32,7 @@ namespace TreasureRunner
             accent = Material("Portal",new Color(.25f,.88f,.73f));
             bark = Material("Wood",new Color(.65f,.37f,.22f));
             RenderSettings.ambientLight = Color.Lerp(new Color(.5f,.63f,.7f),ComicPalette.Ground[world],.25f);
-            RenderSettings.fog = true; RenderSettings.fogColor = ComicPalette.Sky[world];
+            RenderSettings.fog = true; RenderSettings.fogColor = LibraryWorldArt.Sky(world,difficulty);
             RenderSettings.fogMode=FogMode.Linear;RenderSettings.fogStartDistance=28;RenderSettings.fogEndDistance=95;
             var light = new GameObject("Sun").AddComponent<Light>(); light.type = LightType.Directional;
             light.intensity = 1.35f; light.transform.rotation = Quaternion.Euler(45,-30,0);
@@ -40,7 +40,7 @@ namespace TreasureRunner
             light.shadowStrength = .65f;light.shadowBias=.06f;light.shadowNormalBias=.3f;
             Camera camera = new GameObject("Main Camera",typeof(Camera),typeof(AudioListener)).GetComponent<Camera>();
             camera.tag = "MainCamera"; camera.fieldOfView = 42;
-            camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = ComicPalette.Sky[world];
+            camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = LibraryWorldArt.Sky(world,difficulty);
             camera.farClipPlane = 110;
             run.Spawn = new Vector3(1.5f,1.2f,0);
             PlayerHealth player = BuildPlayer(run.Spawn);
@@ -74,7 +74,7 @@ namespace TreasureRunner
             var movement = player.AddComponent<PlayerMovement>();
             movement.moveSpeed = JumpProfile.Speed + (LevelRun.IsCustom ? 0 : Mathf.Min(.75f,config.Stat(1)));
             movement.jumpForce = JumpProfile.LaunchSpeed + (LevelRun.IsCustom ? 0 : Mathf.Min(.6f,config.Stat(2)));
-            player.AddComponent<PlayerCombat>();player.AddComponent<PlayerWard>();player.AddComponent<CharacterAbility>();
+            player.AddComponent<PlayerCombat>();player.AddComponent<PlayerWard>();player.AddComponent<CharacterAbility>();player.AddComponent<LibraryFootsteps>();
             var visual = CharacterCatalog.Build(player.transform,1.8f,-1);
             var presentation = player.AddComponent<CharacterPresentation>(); presentation.visual = visual;
             player.SetActive(true);
@@ -101,10 +101,10 @@ namespace TreasureRunner
             if(s.room==EncounterRoom.SplitPath)
             {
                 // A single optional balcony has a reachable step and a clear reward.
-                var ledge=Platform(x+w*.3f,Mathf.Min(3,w*.26f),y+1.05f,.28f,index);
+                var ledge=Platform(x+w*.55f,Mathf.Min(3,w*.26f),y+1.05f,.28f,index);
                 ledge.name="Schatzbalkon";ledge.AddComponent<OneWayLedge>();
-                CoinAt(new Vector3(x+w*.3f,y+1.85f,0),8);
-                var chest=SpawnEnemy(new Vector3(x+w*.6f,y+.65f,0),false,false,run);AddTactic(chest,EnemyTactic.Hopper);
+                CoinAt(new Vector3(x+w*.55f,y+1.85f,0),8);
+                var chest=SpawnEnemy(new Vector3(x+w*.86f,y+.75f,0),false,false,run);AddTactic(chest,EnemyTactic.Hopper);
             }
             if(s.room==EncounterRoom.Tunnel)
             {
@@ -203,6 +203,12 @@ namespace TreasureRunner
                 }
         }
         public void BuildPreview(LevelTile kind,int biome)=>BuildPreview(new LevelBlock{kind=kind},biome);
+        public void BuildEditorBackdrop(int biome,int width)
+        {
+            world=biome;scenery=gameObject.AddComponent<ComicWorldArt>();scenery.Initialize(world,world*10);
+            openArt=gameObject.AddComponent<OpenWorldArt>();
+            for(int x=0;x<width;x+=10){var section=new RouteSection{x=x,width=10,height=-.5f,feature=RouteFeature.Clearing};scenery.Section(section,x);openArt.Section(section,x/10,world,0);}
+        }
         public void BuildPreview(LevelBlock tile,int biome)
         {
             config=GameConfig.Current;world=biome;difficulty=0;
@@ -223,7 +229,9 @@ namespace TreasureRunner
             var enemy = go.AddComponent<Enemy>();
             var box = go.GetComponent<BoxCollider>();
             float height = boss ? 2.2f : monster ? 1.4f : 1.2f;
-            box.size = new Vector3(boss ? 1.2f : .65f,height,.7f);
+            var skin=variant==null && run!=null && !LevelRun.IsCustom && !monster && !boss ? CampaignEnemyArt.Select(world,Mathf.RoundToInt(position.x)+difficulty,ranged) : null;
+            if(skin!=null)height=1.5f;
+            box.size = new Vector3(boss ? 1.2f : skin!=null ? .8f : .65f,height,.7f);
             if (boss && run!=null) run.RegisterBoss();
             enemy.maxHealth = boss ? 18 + world * 3 : monster ? 6 + world : 3 + world / 2;
             enemy.speed = boss ? .6f : monster ? .7f : 1.3f + difficulty * .15f;
@@ -236,8 +244,8 @@ namespace TreasureRunner
             var patrol = go.GetComponent<EnemyPatrol>();
             patrol.leftDistance = boss ? .7f : 1.1f; patrol.rightDistance = boss ? .7f : 1.1f;
             bool skeleton=!monster && (world==2 || world==4 || world==6);
-            var skeletonSource=variant!=null ? variant.Model : skeleton ? OpenWorldArt.Asset(ranged ? "Skeleton_Mage" : world==6 ? "Skeleton_Warrior" : world==4 ? "Skeleton_Minion" : "Skeleton_Rogue") : null;
-            var visual = skeletonSource!=null ? AddVisual(skeletonSource,go.transform,height,-height/2) : !monster && ((run!=null ? run.DefeatedEnemies : 0)+Mathf.RoundToInt(position.x))%5==0
+            var skeletonSource=skin!=null ? skin.Model : variant!=null ? variant.Model : skeleton ? OpenWorldArt.Asset(ranged ? "Skeleton_Mage" : world==6 ? "Skeleton_Warrior" : world==4 ? "Skeleton_Minion" : "Skeleton_Rogue") : null;
+            var visual = skeletonSource!=null ? AddVisual(skeletonSource,go.transform,height,-height/2,true) : !monster && ((run!=null ? run.DefeatedEnemies : 0)+Mathf.RoundToInt(position.x))%5==0
                 ? AddVisual(config.goblinVisual,go.transform,height,-height/2)
                 : WorldEnemyVisual.Build(go.transform,world,height,monster);
             foreach(var a in visual.GetComponentsInChildren<Animator>()) a.enabled=false;
@@ -250,9 +258,16 @@ namespace TreasureRunner
             }
             patrol.visual = visual;
             go.AddComponent<CharacterPresentation>().visual = visual;
-            if(skeletonSource!=null && skeletonSource.name.StartsWith("Skeleton_")){go.AddComponent<SkeletonMotion>();go.name=ranged ? "Skelettmagier" : world==6 ? "Skelettkrieger" : "Skelettspäher";}
+            if(skin!=null)
+            {
+                if(visual.GetComponentInChildren<Animation>()!=null)go.AddComponent<LibraryMotion>();
+                LibraryWorldArt.ApplyTint(visual,skin.tint);
+                var equipment=go.AddComponent<LibraryEnemyEquipment>();equipment.visual=visual;equipment.skinId=skin.id;equipment.weaponId=skin.weapon;equipment.world=world;go.name=skin.title;
+            }
+            else if(skeletonSource!=null && skeletonSource.name.StartsWith("Skeleton_")){go.AddComponent<SkeletonMotion>();go.name=ranged ? "Skelettmagier" : world==6 ? "Skelettkrieger" : "Skelettspäher";}
+            else if(variant!=null && variant.id.StartsWith("library.") && visual.GetComponentInChildren<Animation>()!=null)go.AddComponent<LibraryMotion>();
             go.AddComponent<EnemyPresentation>();
-            if(ranged) { go.name=WorldEnemyVisual.Name(world,false)+"-Schütze";go.AddComponent<EnemyRangedAttack>(); }
+            if(ranged) { if(skin==null)go.name=WorldEnemyVisual.Name(world,false)+"-Schütze";go.AddComponent<EnemyRangedAttack>(); }
             var awareness=go.AddComponent<EnemyAwareness>();
             awareness.detectionRange=ranged ? 8 : monster ? 5 : 6;awareness.keepDistance=ranged && (variant!=null ? variant.retreat : world==4 || world==6);
             if(boss){go.AddComponent<WorldBoss>().world=world;}
@@ -273,10 +288,16 @@ namespace TreasureRunner
             Vector3 p=new Vector3(tile.x,tile.y,0);GameObject model=a.Model;
             switch(a.role)
             {
+                case BuilderRole.Cannon:case BuilderRole.Flame:
+                    Platform(tile.x,1,tile.y,.65f,0);
+                    TrapModel.Build(transform,a.role==BuilderRole.Cannon ? TrapKind.Cannon : TrapKind.Flame,p,tile.y,stone,gold,model);return true;
+                case BuilderRole.Spring:Spring(p,model);return true;
+                case BuilderRole.FallingRock:TrapModel.Build(transform,TrapKind.FallingRock,p,tile.y-4,stone,gold,model);return true;
                 case BuilderRole.Block:
                     var block=Platform(tile.x,tile.kind==LevelTile.Lift ? 2 : 1,tile.y,.65f,0);block.name=a.title;
-                    AssetBlockSurface.Attach(block,model,stone);
-                    if(tile.kind==LevelTile.Lift){block.AddComponent<MovingRide>();}return true;
+                    if(tile.kind==LevelTile.Lift)block.AddComponent<MovingRide>();
+                    AssetBlockSurface.Attach(block,model,stone,a.id.StartsWith("library."));
+                    return true;
                 case BuilderRole.Health:case BuilderRole.Shield:Powerup(p+Vector3.up*.7f,a);return true;
                 case BuilderRole.Coin:CoinAt(p+Vector3.up*.55f,a.coins,model);return true;
                 case BuilderRole.Decoration:
@@ -304,10 +325,10 @@ namespace TreasureRunner
             var collider=root.AddComponent<SphereCollider>();collider.radius=.4f;collider.isTrigger=true;
             if(asset.role==BuilderRole.Health)root.AddComponent<HealthPickup>();else root.AddComponent<WardPickup>();root.AddComponent<CoinSpin>();
         }
-        private void Spring(Vector3 p)
+        private void Spring(Vector3 p,GameObject model=null)
         {
             var spring=new GameObject("Sprungfeder");spring.transform.SetParent(transform,false);spring.transform.position=p;
-            AssetBlockSurface.Fit(OpenWorldArt.Asset("Platformer_spring"),spring.transform,new Vector3(0,.15f,0),new Vector3(.8f,.3f,.8f));
+            AssetBlockSurface.Fit(model??OpenWorldArt.Asset("Platformer_spring"),spring.transform,new Vector3(0,.15f,0),new Vector3(.8f,.3f,.8f));
             var box=spring.AddComponent<BoxCollider>();box.center=Vector3.up*.15f;box.size=new Vector3(.8f,.3f,.8f);box.isTrigger=true;spring.AddComponent<SpringPad>();
         }
         private void Portal(Vector3 position)
@@ -327,7 +348,7 @@ namespace TreasureRunner
             foreach (Collider c in instance.GetComponentsInChildren<Collider>()) c.enabled = false;
             foreach (Rigidbody b in instance.GetComponentsInChildren<Rigidbody>()) b.isKinematic = true;
         }
-        public static Transform AddVisual(GameObject source,Transform parent,float height,float feetY)
+        public static Transform AddVisual(GameObject source,Transform parent,float height,float feetY,bool neutralLegacyPose=false)
         {
             if (source == null) return null;
             var instance = Instantiate(source,parent); instance.name = "Visual";
@@ -335,6 +356,11 @@ namespace TreasureRunner
             foreach (Collider c in instance.GetComponentsInChildren<Collider>()) c.enabled = false;
             foreach (Rigidbody body in instance.GetComponentsInChildren<Rigidbody>()) Destroy(body);
             foreach (Animator animator in instance.GetComponentsInChildren<Animator>()) animator.applyRootMotion = false;
+            if(neutralLegacyPose)foreach(Animation animation in instance.GetComponentsInChildren<Animation>())
+            {
+                foreach(AnimationState state in animation)if(state.name.ToLowerInvariant().Contains("idle")){animation.Play(state.name);state.time=0;animation.Sample();animation.Stop();break;}
+                animation.enabled=false;
+            }
             Bounds bounds = VisualBounds(instance);
             instance.transform.localScale *= height / Mathf.Max(.01f,bounds.size.y);
             bounds = VisualBounds(instance);
@@ -345,8 +371,8 @@ namespace TreasureRunner
         private static Bounds VisualBounds(GameObject instance)
         {
             var renderers = instance.GetComponentsInChildren<Renderer>();
-            Bounds bounds = renderers.Length > 0 ? renderers[0].bounds : new Bounds(instance.transform.position,Vector3.one);
-            for (int i = 1; i < renderers.Length; i++) bounds.Encapsulate(renderers[i].bounds);
+            Bounds bounds = renderers.Length > 0 ? AssetBlockSurface.GeometryBounds(renderers[0]) : new Bounds(instance.transform.position,Vector3.one);
+            for (int i = 1; i < renderers.Length; i++) bounds.Encapsulate(AssetBlockSurface.GeometryBounds(renderers[i]));
             return bounds;
         }
         private Material Material(string title,Color color)
@@ -367,6 +393,7 @@ namespace TreasureRunner
         {
             // Runtime-created materials are shared by level geometry, then released with the level.
             var materials = new System.Collections.Generic.HashSet<Material>();
+            foreach(var material in new[]{terrain,stone,gold,accent,bark})if(material!=null)materials.Add(material);
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 if (r.sharedMaterial != null && (r.sharedMaterial == terrain || r.sharedMaterial == stone ||
                     r.sharedMaterial == gold || r.sharedMaterial == accent || r.sharedMaterial == bark ||

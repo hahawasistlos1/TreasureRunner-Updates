@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 namespace TreasureRunner
@@ -17,19 +18,21 @@ namespace TreasureRunner
     [Serializable] public class CommunityCatalog { public int version=1,moderationProtocol;public string gameVersion="";public CommunityLevel[] levels; }
     public static class LevelCodec
     {
-        public const int MaxTiles=650;
+        public const int MaxWidth=384,MaxHeight=32,MaxTiles=2400,MaxCodeLength=400000,MaxDecodedBytes=524288;
+        public static int Cell(int x,int y)=>y*MaxWidth+x;
+        public static int RequiredFormat(CommunityLevel level)=>level.width>96 || level.height>16 || level.tiles.Count>650 ? 5 : level.tiles.Where(t=>!string.IsNullOrEmpty(t.asset)).Select(t=>BuilderPalette.Get(t.asset)?.format??3).DefaultIfEmpty(1).Max();
         public static bool Floor(LevelTile kind)=>kind!=LevelTile.Coin && kind!=LevelTile.FallingRock;
         public static bool Validate(CommunityLevel l,out string reason)
         {
             reason="";
-            if(l==null || (l.format<1 || l.format>3)){reason="Unbekanntes Level-Format.";return false;}
-            if(l.world<0 || l.world>7 || l.width<16 || l.width>96 || l.height<8 || l.height>16 || l.tiles==null || l.tiles.Count>MaxTiles ||
+            if(l==null || (l.format<1 || l.format>5)){reason="Unbekanntes Level-Format.";return false;}
+            if(l.world<0 || l.world>7 || l.width<16 || l.width>MaxWidth || l.height<8 || l.height>MaxHeight || l.tiles==null || l.tiles.Count>MaxTiles || (l.format<5 && (l.width>96 || l.height>16 || l.tiles.Count>650)) ||
                 string.IsNullOrWhiteSpace(l.title) || l.title.Length>40 || string.IsNullOrWhiteSpace(l.author) || l.author.Length>24 || l.revision<1 || l.revision>10000 || l.id==null || l.id.Length>64)
             {reason="Level-Daten liegen außerhalb der erlaubten Grenzen.";return false;}
             var cells=new HashSet<int>();var floors=new List<LevelBlock>();LevelBlock goal=null;
             foreach(var tile in l.tiles)
             {
-                if(tile==null || tile.x<0 || tile.x>=l.width || tile.y<0 || tile.y>=l.height || !Enum.IsDefined(typeof(LevelTile),tile.kind) || !cells.Add(tile.y*96+tile.x))
+                if(tile==null || tile.x<0 || tile.x>=l.width || tile.y<0 || tile.y>=l.height || !Enum.IsDefined(typeof(LevelTile),tile.kind) || !cells.Add(Cell(tile.x,tile.y)))
                 {reason="Ungültiges oder doppelt belegtes Feld.";return false;}
                 if(!string.IsNullOrEmpty(tile.asset))
                 {
@@ -43,18 +46,18 @@ namespace TreasureRunner
             {reason="Am Start fehlt ein Bodenfeld.";return false;}
             if(goal==null){reason="Setze ein Zielportal.";return false;}
             // Conservative static reachability: does not promise timing/skill, but rejects disconnected goals.
-            var reached=new HashSet<int>{l.spawnY*96+l.spawnX};var pending=new Queue<Vector2Int>();pending.Enqueue(new Vector2Int(l.spawnX,l.spawnY));
+            var reached=new HashSet<int>{Cell(l.spawnX,l.spawnY)};var pending=new Queue<Vector2Int>();pending.Enqueue(new Vector2Int(l.spawnX,l.spawnY));
             while(pending.Count>0)
             {
                 var other=pending.Dequeue();
                 foreach(var tile in floors)
                 {
-                    int key=tile.y*96+tile.x;if(reached.Contains(key))continue;
+                    int key=Cell(tile.x,tile.y);if(reached.Contains(key))continue;
                     if(JumpProfile.CanCross(Mathf.Max(0,Mathf.Abs(tile.x-other.x)-1),tile.y-other.y))
                     {reached.Add(key);pending.Enqueue(new Vector2Int(tile.x,tile.y));}
                 }
             }
-            if(!reached.Contains(goal.y*96+goal.x)){reason="Das Ziel ist vom Start aus nicht über Boden und Sprünge erreichbar.";return false;}
+            if(!reached.Contains(Cell(goal.x,goal.y))){reason="Das Ziel ist vom Start aus nicht über Boden und Sprünge erreichbar.";return false;}
             return true;
         }
         public static string Encode(CommunityLevel level)
@@ -68,7 +71,7 @@ namespace TreasureRunner
         }
         public static CommunityLevel Decode(string code)
         {
-            if(string.IsNullOrWhiteSpace(code) || code.Length>100000)throw new FormatException("Level-Code fehlt oder ist zu groß.");
+            if(string.IsNullOrWhiteSpace(code) || code.Length>MaxCodeLength)throw new FormatException("Level-Code fehlt oder ist zu groß.");
             code=code.Trim();int start=code.IndexOf("TRL1:",StringComparison.Ordinal);
             if(start<0)throw new FormatException("Level-Code muss mit TRL1: beginnen.");
             string payload=code.Substring(start+5).Trim();int end=payload.IndexOfAny(new[]{'\r','\n',' ','`'});if(end>=0)payload=payload.Substring(0,end);
@@ -76,9 +79,13 @@ namespace TreasureRunner
             using(var source=new MemoryStream(packed))using(var zip=new DeflateStream(source,CompressionMode.Decompress))using(var target=new MemoryStream())
             {
                 var buffer=new byte[2048];int n;
-                while((n=zip.Read(buffer,0,buffer.Length))>0){if(target.Length+n>131072)throw new FormatException("Level entpackt zu groß.");target.Write(buffer,0,n);}
+                while((n=zip.Read(buffer,0,buffer.Length))>0){if(target.Length+n>MaxDecodedBytes)throw new FormatException("Level entpackt zu groß.");target.Write(buffer,0,n);}
                 return JsonUtility.FromJson<CommunityLevel>(Encoding.UTF8.GetString(target.ToArray()));
             }
+        }
+        public static CommunityLevel Empty(int world=0)
+        {
+            return new CommunityLevel{format=5,width=MaxWidth,height=MaxHeight,world=Mathf.Clamp(world,0,7),id=Guid.NewGuid().ToString("N"),author=ProgressStore.Data.playerName};
         }
         public static CommunityLevel Starter(int world=0)
         {

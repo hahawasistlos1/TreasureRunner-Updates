@@ -168,10 +168,11 @@ namespace TreasureRunner
             run=LevelRun.Instance;run.Menu();yield return null;yield return null;yield return null;
             var menu=FindFirstObjectByType<MainMenuController>();Check(menu!=null,"Redesigned menu opens");
             foreach(var page in new[]{"Start","Levelauswahl","Shop","Inventar","Charakter","Freunde","Rangliste","Einstellungen","Profil","Community"}){menu.Show(page);yield return null;Check(true,"Menu page opens without Unity errors: "+page);}
-            LevelEditorScreen.Working=LevelCodec.Starter();LevelEditorScreen.Open();yield return null;
-            var editor=FindFirstObjectByType<LevelEditorScreen>();var painting=FindFirstObjectByType<EditorPaintSurface>();
+            LevelEditorScreen.OpenDocument(LevelCodec.Starter());yield return null;
+            var editor=FindFirstObjectByType<LevelEditorScreen>();var painting=FindFirstObjectByType<EditorLevelScene>();
             Check(editor!=null && painting!=null,"In-game level editor opens with touch paint surface");
             painting.paint(4,1);Check(LevelEditorScreen.Working.tiles.Exists(t=>t.x==4 && t.y==1),"Editor paints a platform on the selected cell");
+            GameObject.Find("Button Level einrichten").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
             GameObject.Find("Button Version +1").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();Check(LevelEditorScreen.Working.revision==2,"Editor can publish a higher revision of the same level");
             int wallet=ProgressStore.Data.coins,unlocked=ProgressStore.Data.highestUnlockedLevel;
             LevelRun.StartCustom(LevelEditorScreen.Working);yield return null;yield return null;yield return null;

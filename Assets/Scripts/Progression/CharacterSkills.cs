@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 namespace TreasureRunner
 {
@@ -13,7 +14,7 @@ namespace TreasureRunner
             "Ein Treffer mit Bogen oder Armbrust verlangsamt den Gegner für 1 / 1,5 / 2 s. Danach 12 / 10 / 8 s Ladezeit.",
             "Ein Treffer mit Runen- oder Froststab verursacht +1 Schaden und zeigt ein Runenecho. Danach 12 / 10 / 8 s Ladezeit. Schilde gelten weiter."
         };
-        public static int Index(string id)=>Array.IndexOf(Ids,id);
+        public static int Index(string id){var character=CharacterCatalog.All.FirstOrDefault(c=>c.id==id);return character==null ? -1 : Array.IndexOf(Ids,character.abilityId);}
         public static string Title(string id){int i=Index(id);return i<0 ? "Unbekannte Fähigkeit" : Names[i];}
         public static string Description(string id){int i=Index(id);return i<0 ? "" : Descriptions[i];}
         public static int StoredLevel(string id){int i=Index(id);var values=ProgressStore.Data.characterSkills;return i<0 || values==null || i>=values.Length ? 0 : Mathf.Clamp(values[i],0,Cap);}

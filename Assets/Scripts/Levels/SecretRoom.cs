@@ -5,7 +5,10 @@ namespace TreasureRunner
     {
         public bool HasKey {get;private set;}
         public bool Claimed {get;private set;}
+        public bool DoorRetired {get;private set;}
         GameObject gate;Transform key;Transform returnPoint;int levelId;Vector3 interiorSpawn;
+        Collider entrance;PlayerHealth returningPlayer,insidePlayer;bool inside,returnLocked;float unlockAfter;
+        public bool IsInside=>inside;
         public static SecretRoom Build(Transform parent,RouteSection section,int world,int levelId)
         {
             var root=new GameObject("Geheimraum mit Schlüssel");root.transform.SetParent(parent);var room=root.AddComponent<SecretRoom>();room.levelId=levelId;
@@ -16,6 +19,7 @@ namespace TreasureRunner
             // The door is optional. The interior is outside the route's camera range, so trees cannot obscure it.
             var door=Cube(root.transform,"Schlüsseltür",entry+Vector3.forward*1.1f,new Vector3(1.1f,2, .3f),GameUI.Gold,false);
             var entryZone=new GameObject("Schatzkammer betreten");entryZone.transform.SetParent(root.transform);entryZone.transform.position=entry;entryZone.transform.localScale=new Vector3(1,2,1);entryZone.AddComponent<SecretDoorTrigger>().Setup(room,1);
+            room.entrance=entryZone.GetComponent<Collider>();
             Vector3 inside=new Vector3(-200-section.x*2,section.height+1.05f,0);
             room.interiorSpawn=inside;
             Cube(root.transform,"Schatzkammerboden",inside-Vector3.up*1.4f,new Vector3(20,.7f,4),ComicPalette.Ground[world],true);
@@ -43,17 +47,39 @@ namespace TreasureRunner
         {
             var run=LevelRun.Instance;if(run==null || !run.IsPlaying || run.Player!=player)return;
             if(kind==0){if(HasKey)return;HasKey=true;key.gameObject.SetActive(false);run.HUD?.Toast("Schlüssel gefunden! Die goldene Tür führt zur Schatzkammer.");GameEffects.Spark(player.transform.position);}
-            else if(kind==1){if(!HasKey){run.HUD?.Toast("Für diese Schatzkammer brauchst du den goldenen Schlüssel.");return;}Teleport(player,interiorSpawn);run.HUD?.Toast("Geheimraum entdeckt! Türkises Tor: zurück zum Hauptweg.");}
-            else if(kind==2){if(Claimed)return;Claimed=true;int reward=SpecialTreasure.Claim("secret."+levelId);if(reward>0)CoinManager.Instance?.AddCoins(reward);run.HUD?.Toast(reward>0 ? "Seltener Schatz! +"+reward+" Münzen und ein Sammlerabzeichen." : "Schatz bereits gesammelt – dein Abzeichen bleibt erhalten.");GameEffects.Spark(player.transform.position);}
-            else if(kind==3)Teleport(player,returnPoint.position+Vector3.right*1.8f);
+            else if(kind==1){if(DoorRetired || inside || returnLocked)return;if(!HasKey){run.HUD?.Toast("Für diese Schatzkammer brauchst du den goldenen Schlüssel.");return;}inside=true;insidePlayer=player;Teleport(player,interiorSpawn);run.HUD?.Toast("Geheimraum entdeckt! Türkises Tor: zurück zum Hauptweg.");}
+            else if(kind==2){if(Claimed || !inside)return;Claimed=true;int reward=SpecialTreasure.Claim("secret."+levelId);if(reward>0)CoinManager.Instance?.AddCoins(reward);run.HUD?.Toast(reward>0 ? "Seltener Schatz! +"+reward+" Münzen und ein Sammlerabzeichen." : "Schatz bereits gesammelt – dein Abzeichen bleibt erhalten.");GameEffects.Spark(player.transform.position);}
+            else if(kind==3 && inside)
+            {
+                inside=false;returnLocked=true;returningPlayer=player;unlockAfter=Time.time+.5f;
+                // Both trigger callbacks and interpolated poses can still describe the old overlap.
+                // Place the entire player outside the door and re-arm only after actual separation.
+                float clearance=entrance.bounds.extents.x+player.GetComponent<Collider>().bounds.extents.x+.65f;
+                int side=player.GetComponent<PlayerMovement>().Facing<0 ? -1 : 1;
+                Teleport(player,returnPoint.position+Vector3.right*side*Mathf.Max(1.8f,clearance));
+                RetireClaimedDoor();
+            }
+        }
+        void RetireClaimedDoor()
+        {
+            if(!Claimed || DoorRetired)return;
+            DoorRetired=true;gate.SetActive(false);entrance.enabled=false;entrance.gameObject.SetActive(false);
         }
         static void Teleport(PlayerHealth player,Vector3 point)
         {
             var movement=player.GetComponent<PlayerMovement>();movement.ClearInput();var body=player.GetComponent<Rigidbody>();body.position=point;body.linearVelocity=Vector3.zero;player.GrantInvulnerability(1);
             var camera=Camera.main;if(camera!=null){var follow=camera.GetComponent<CameraFollow>();if(follow!=null)camera.transform.position=point+follow.offset;}
         }
-        void Update(){if(key!=null && key.gameObject.activeSelf)key.Rotate(0,80*Time.deltaTime,0);}
-        void OnDestroy(){foreach(var renderer in GetComponentsInChildren<Renderer>())if(renderer.sharedMaterial!=null && (renderer.sharedMaterial.name.StartsWith("Schatzkammer") || renderer.sharedMaterial.name=="Rückweg" || renderer.sharedMaterial.name=="Schlüsseltür"))Destroy(renderer.sharedMaterial);}
+        void Update()
+        {
+            if(key!=null && key.gameObject.activeSelf)key.Rotate(0,80*Time.deltaTime,0);
+            if(inside && insidePlayer!=null && Mathf.Abs(insidePlayer.GetComponent<Rigidbody>().position.x-interiorSpawn.x)>11)
+            {inside=false;returnLocked=true;returningPlayer=insidePlayer;unlockAfter=Time.time+.5f;RetireClaimedDoor();}
+            if(!returnLocked || returningPlayer==null || Time.time<unlockAfter)return;
+            var zone=entrance.bounds;zone.Expand(.3f);
+            if(!zone.Intersects(returningPlayer.GetComponent<Collider>().bounds)){returnLocked=false;returningPlayer=null;}
+        }
+        void OnDestroy(){foreach(var renderer in GetComponentsInChildren<Renderer>(true))if(renderer.sharedMaterial!=null && (renderer.sharedMaterial.name.StartsWith("Schatzkammer") || renderer.sharedMaterial.name=="Rückweg" || renderer.sharedMaterial.name=="Schlüsseltür"))Destroy(renderer.sharedMaterial);}
     }
     public class SecretDoorTrigger:MonoBehaviour
     {

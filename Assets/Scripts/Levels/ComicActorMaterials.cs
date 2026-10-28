@@ -9,11 +9,12 @@ namespace TreasureRunner
         {
             foreach(var r in root.GetComponentsInChildren<Renderer>())
             {
+                if(r.GetComponent<LibraryPlaneVisual>()!=null)continue;
                 if(!(r is MeshRenderer) && !(r is SkinnedMeshRenderer))continue;
                 var slots=r.sharedMaterials;
                 for(int i=0;i<slots.Length;i++)
                 {
-                    var original=slots[i];if(original==null || original.shader==ComicPalette.Shader)continue;
+                    var original=slots[i];if(original==null || original.shader==ComicPalette.Shader || original.shader.name=="TreasureRunner/Library Sprite")continue;
                     if(!copies.TryGetValue(original,out var copy))
                     {
                         Color color=original.HasProperty("_BaseColor") ? original.GetColor("_BaseColor") : original.color;

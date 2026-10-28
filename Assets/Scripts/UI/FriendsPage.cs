@@ -12,7 +12,7 @@ namespace TreasureRunner
             GameUI.Text("Eine Einladung erhalten?",page,25,GameUI.Gold);
             var input=LevelEditorScreen.Input(page,"",FriendInvites.MaxUrl,65);
             GameUI.Button("Eingefügten Einladungslink öffnen",page,()=>{InviteReceiver.Ensure();InviteReceiver.Instance.Queue(input.text.Trim(),out var message);menu.Notify(message);});
-            GameUI.Button("Link aus Zwischenablage einfügen",page,()=>{input.text=GUIUtility.systemCopyBuffer;menu.Notify("Eingefügt. Tippe zum Prüfen auf „Einladungslink öffnen“.");});
+            GameUI.Button("Link aus Zwischenablage einfügen",page,()=>{SharedLinkInput.Paste(input,out var message);menu.Notify(message);});
             GameUI.WrappedText("Auf diesem Gerät gespeicherte Kontakte · kein Online-Status. Für Kontakte auf beiden Geräten teilt ihr eure Einladungslinks gegenseitig. Einladen startet noch kein Koop-Spiel.",page,21,GameUI.Muted);
             var contacts=FriendInvites.Contacts;
             GameUI.Text("Deine Kontakte · "+contacts.Count,page,27,GameUI.Gold);

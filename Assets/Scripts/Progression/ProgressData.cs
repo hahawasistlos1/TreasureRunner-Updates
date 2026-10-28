@@ -22,6 +22,7 @@ namespace TreasureRunner
         public float effectsVolume = 0.7f;
         public bool muted;
         public bool movementArrows;
+        public string libraryButton="",libraryPanel="";
         public float touchMovementScale=1.2f,touchJumpScale=1.2f,touchAttackScale=1.2f,touchWeaponScale=1f;
         public string friendId;
         public List<FriendContact> friends = new List<FriendContact>();
